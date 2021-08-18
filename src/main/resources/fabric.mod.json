@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "armorhud",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Simple armor hud",
+  "description": "A mod that adds your armor to the hud",
   "authors": [
-    "Me!"
+    "LegoRaft"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
+    "homepage": "https://github.com/LegoRaft/simple-armor-hud",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "GPL-3.0",
+  "icon": "assets/armorhud/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.legoraft.armorhud.armorHud"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "armorhud.mixins.json"
   ],
 
   "depends": {
