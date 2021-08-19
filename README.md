@@ -1,7 +1,11 @@
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/50689727/130094678-7640882a-e9dc-4c09-837c-e9eb1c99b0cd.png" width="72px" height="72px"/>
+</p>
+    
 <h1 align="center">Simple armor hud</h1>
 
 <p align="center">
-    <img src = "https://img.shields.io/badge/for%20MC-1.17.x-green" alt = "Minecraft version"/>
+    <img src="https://img.shields.io/badge/for%20MC-1.17.x-green" alt = "Minecraft version"/>
     <img src="https://img.shields.io/github/v/release/LegoRaft/simple-armor-hud?color=yellow" alt="Release">
     <img src="https://tokei.rs/b1/github/LegoRaft/simple-armor-hud" alt="Lines of code">
 </p>
