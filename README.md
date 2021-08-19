@@ -19,3 +19,6 @@ If you have any bug reports or a suggestion for the mod leave them [here](https:
 
 ### Dependencies
 Simple armor hud doesn't require any other mods.
+
+### Installation
+For an installation tutorial, go [here](https://fabricmc.net/wiki/install). Note: Simple armor hud **doesn't require** the Fabric API
