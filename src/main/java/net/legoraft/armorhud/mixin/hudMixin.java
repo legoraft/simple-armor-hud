@@ -23,20 +23,20 @@ public abstract class hudMixin {
 	@Shadow protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
-	public void renderArmorHud(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
+	public void renderArmorHud(float tickDelta, MatrixStack matrices, CallbackInfo ci) throws InterruptedException {
 		assert this.client.player != null;
 
 		int i = this.scaledHeight - 55;
 
 //		Moves armorhud up if player is under water
 		if (!client.player.isSubmergedInWater() && !client.player.isCreative()) {
-			i = this.scaledHeight - 54;
+			i = this.scaledHeight - 55;
 		}
 		if (client.player.isSubmergedInWater() && !client.player.isCreative()) {
-			i = this.scaledHeight - 64;
+			i = this.scaledHeight - 65;
 		}
 		if (client.player.isCreative()) {
-			i = this.scaledHeight - 37;
+			i = this.scaledHeight - 38;
 		}
 
 //		Render all armor items from player
