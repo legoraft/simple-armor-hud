@@ -17,7 +17,6 @@ public class hudMixin {
 	@Shadow private int scaledWidth;
 	@Shadow private int scaledHeight;
 
-
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	public void renderArmorHud(float delta, MatrixStack matrices, CallbackInfo ci) {
 		assert this.client.player != null;
@@ -25,16 +24,19 @@ public class hudMixin {
 		int i = this.scaledHeight - 55;
 
 //		Moves armorhud up if player is under water
-		if (!client.player.isSubmergedInWater()) {
-			i = this.scaledHeight - 55;
+		if (!client.player.isSubmergedInWater() && !client.player.isCreative()) {
+			i = this.scaledHeight - 54;
 		}
-		if (client.player.isSubmergedInWater()) {
-			i = this.scaledHeight - 63;
+		if (client.player.isSubmergedInWater() && !client.player.isCreative()) {
+			i = this.scaledHeight - 64;
+		}
+		if (client.player.isCreative()) {
+			i = this.scaledHeight - 37;
 		}
 
 //		Render all armor items from player
-		MinecraftClient.getInstance().getItemRenderer().renderInGui(this.client.player.getInventory().getArmorStack(3), this.scaledWidth / 2 + 18, i);
-		MinecraftClient.getInstance().getItemRenderer().renderInGui(this.client.player.getInventory().getArmorStack(2), this.scaledWidth / 2 + 33, i);
+		MinecraftClient.getInstance().getItemRenderer().renderInGuiWithOverrides(this.client.player.getInventory().getArmorStack(3), this.scaledWidth / 2 + 18, i);
+		MinecraftClient.getInstance().getItemRenderer().renderGuiItemIcon(this.client.player.getInventory().getArmorStack(2), this.scaledWidth / 2 + 33, i);
 		MinecraftClient.getInstance().getItemRenderer().renderInGui(this.client.player.getInventory().getArmorStack(1), this.scaledWidth / 2 + 48, i);
 		MinecraftClient.getInstance().getItemRenderer().renderInGui(this.client.player.getInventory().getArmorStack(0), this.scaledWidth / 2 + 63, i);
 
