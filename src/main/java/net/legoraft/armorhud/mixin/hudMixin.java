@@ -19,11 +19,10 @@ public abstract class hudMixin {
 	@Shadow @Final private MinecraftClient client;
 	@Shadow private int scaledWidth;
 	@Shadow private int scaledHeight;
-
 	@Shadow protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
-	public void renderArmorHud(float tickDelta, MatrixStack matrices, CallbackInfo ci) throws InterruptedException {
+	public void renderArmorHud(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
 		assert this.client.player != null;
 
 		int i = this.scaledHeight - 55;
