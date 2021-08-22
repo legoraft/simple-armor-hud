@@ -35,7 +35,7 @@ public abstract class hudMixin {
 			i = this.scaledHeight - 65;
 		}
 		if (client.player.isCreative()) {
-			i = this.scaledHeight - 38;
+			i = this.scaledHeight - 39;
 		}
 
 //		Render all armor items from player
