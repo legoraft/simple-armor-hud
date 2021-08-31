@@ -21,7 +21,7 @@ public abstract class hudMixin {
 	@Shadow private int scaledHeight;
 	@Shadow protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
 
-	@Inject(at = @At("TAIL"), method = "renderHotbar")
+	@Inject(at = @At("HEAD"), method = "renderHotbar")
 	public void renderArmorHud(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
 		assert this.client.player != null;
 
