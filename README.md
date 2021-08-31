@@ -13,7 +13,7 @@
 ## Information
 
 ### Features
-This mod shows your armor above the foodbar in the in-game hud. Also moves armor up when underwater and down when in creative.
+This mod shows your armor above the foodbar in the in-game hud. Also moves armor up when underwater and down when in creative. <br>
 <img src="https://user-images.githubusercontent.com/50689727/130084592-5a35579a-f300-4c6e-b6ad-9b6bd620904c.png"  alt="armor hud third person" width="640" height="360"/> <br>
 _Shows armor you're currently wearing_
 
