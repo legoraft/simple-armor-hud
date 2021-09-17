@@ -45,4 +45,10 @@ public abstract class hudMixin {
 		this.renderHotbarItem(this.scaledWidth / 2 + 63, i, tickDelta, client.player, this.client.player.getInventory().getArmorStack(0), 1);
 
 	}
+	
+	@ModifyVariable(at = @At("STORE"), method = "renderHeldItemTooltip", ordinal = 2)
+	public int renderHeldItemTooltip(int k) {
+		return this.scaledHeight - 62;
+	}
+	
 }
