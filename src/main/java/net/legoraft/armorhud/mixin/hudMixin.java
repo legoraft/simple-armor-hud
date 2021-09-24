@@ -26,24 +26,22 @@ public abstract class hudMixin {
 		assert this.client.player != null;
 
 		int i = this.scaledHeight - 55;
+		int h = 63;
 
 //		Moves armorhud up if player is under water
-		if (!client.player.isSubmergedInWater() && !client.player.isCreative()) {
-			i = this.scaledHeight - 55;
-		}
 		if (client.player.isSubmergedInWater() && !client.player.isCreative()) {
 			i = this.scaledHeight - 65;
 		}
+//		Moves armorhud down if player is in creative
 		if (client.player.isCreative()) {
 			i = this.scaledHeight - 39;
 		}
 
 //		Render all armor items from player
-		this.renderHotbarItem(this.scaledWidth / 2 + 18, i, tickDelta, client.player, this.client.player.getInventory().getArmorStack(3), 1);
-		this.renderHotbarItem(this.scaledWidth / 2 + 33, i, tickDelta, client.player, this.client.player.getInventory().getArmorStack(2), 1);
-		this.renderHotbarItem(this.scaledWidth / 2 + 48, i, tickDelta, client.player, this.client.player.getInventory().getArmorStack(1), 1);
-		this.renderHotbarItem(this.scaledWidth / 2 + 63, i, tickDelta, client.player, this.client.player.getInventory().getArmorStack(0), 1);
-
+		for (int j = 0; j < 4; j++) {
+			this.renderHotbarItem(this.scaledWidth / 2 + h, i, tickDelta, client.player, this.client.player.getInventory().getArmorStack(j), 1);
+			h = h - 15;
+		}
 	}
 	
 	@ModifyVariable(at = @At("STORE"), method = "renderHeldItemTooltip", ordinal = 2)
