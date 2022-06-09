@@ -5,7 +5,7 @@
 <h1 align="center">Simple armor hud</h1>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/for%20MC-1.17.x,%201.18.x-green" alt="Minecraft version"/>
+    <img src="https://img.shields.io/badge/for%20MC-1.17.x,%201.18.x,%201.19-green" alt="Minecraft version"/>
     <img src="https://img.shields.io/github/v/release/LegoRaft/simple-armor-hud?color=yellow" alt="Release"/>
     <img src="https://tokei.rs/b1/github/LegoRaft/simple-armor-hud" alt="Lines of code"/>
 </p>
