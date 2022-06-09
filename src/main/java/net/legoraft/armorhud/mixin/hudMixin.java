@@ -32,7 +32,7 @@ public abstract class hudMixin {
 		int h = 63;
 
 //		Moves armorhud up if player is under water
-		if (client.player.isSubmergedInWater() && !client.player.isCreative()) {
+		if (client.player.getAir() < client.player.getMaxAir()) {
 			i = this.scaledHeight - 65;
 		}
 //		Moves armorhud down if player is in creative
