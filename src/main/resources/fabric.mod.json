@@ -4,13 +4,13 @@
   "version": "${version}",
 
   "name": "Simple armor hud",
-  "description": "A mod that adds your armor to the hud",
+  "description": "A simple mod that adds your armor to the hud above the food bar",
   "authors": [
     "LegoRaft"
   ],
   "contact": {
     "homepage": "https://github.com/LegoRaft/simple-armor-hud",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/LegoRaft/simple-armor-hud"
   },
 
   "license": "GPL-3.0",
