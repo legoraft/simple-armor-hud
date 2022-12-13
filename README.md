@@ -11,6 +11,9 @@
     <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
 </p>
 
+## Announcement
+At the moment, there is a request running to make the armor placement configurable ([#11](https://github.com/legoraft/simple-armor-hud/issues/11)). As said in the bug report, I'll try to implement this. At the moment life is quite busy for me, meaning I won't implement any major changes to the mod. The mod will be kept up to date with the current features and small bugs will still be smashed. The bigger update with configurable placement will be postponed until I have more time.
+
 ## Information
 
 ### Features
