@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.armorhud.mixin.client",
+	"compatibilityLevel": "JAVA_17",
+	"client": [
+		"armorHudMixin",
+		"tooltipMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

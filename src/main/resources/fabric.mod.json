@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "simple-armor-hud",
+	"version": "${version}",
+	"name": "Simple armor hud",
+	"description": "A simple mod that adds your armor to the hud above the food bar",
+	"authors": [
+		"LegoRaft"
+	],
+	"contact": {
+		"homepage": "https://github.com/LegoRaft/simple-armor-hud",
+		"sources": "https://github.com/LegoRaft/simple-armor-hud",
+		"issues": "https://github.com/LegoRaft/simple-armor-hud/issues"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/simple-armor-hud/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+		]
+	},
+	"mixins": [
+		"simple-armor-hud.mixins.json",
+		{
+			"config": "simple-armor-hud.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.19",
+		"minecraft": "~1.19.4",
+		"java": ">=17"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
