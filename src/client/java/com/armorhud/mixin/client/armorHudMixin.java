@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -37,13 +38,16 @@ public abstract class armorHudMixin {
 		int i = this.scaledHeight - 55;
 
 //		Moves armorhud up if player is underwater
-		if (client.player.getAir() < client.player.getMaxAir()) {
+		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSwimming()) {
 			i = this.scaledHeight - 65;
+			System.out.println("Moving...");
 		}
+
 //		Moves armorhud down if player is in creative
 		if (client.player.isCreative()) {
 			i = this.scaledHeight - 39;
 		}
+
 //		Moves armorhud up if player is on mount
 		if (client.player.hasVehicle() && getRiddenEntity() != null) {
 			if (getRiddenEntity().isAlive()) {
