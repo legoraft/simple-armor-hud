@@ -28,7 +28,7 @@ If you have any bug reports or a suggestion for the mod leave them [here](https:
 Simple armor hud doesn't require any other mods.
 
 ### Installation
-Releases for the mod are found on [Curseforge](https://www.curseforge.com/minecraft/mc-mods/simple-armor-hud) and at [Releases](https://github.com/LegoRaft/simple-armor-hud/releases). <br>
+Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud/), [Releases](https://github.com/LegoRaft/simple-armor-hud/releases) and at [Curseforge](https://www.curseforge.com/minecraft/mc-mods/simple-armor-hud). <br>
 For an installation tutorial, go [here](https://fabricmc.net/wiki/install). Note: Simple armor hud **doesn't require** the Fabric API
 
 ### Build
