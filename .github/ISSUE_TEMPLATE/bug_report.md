@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Add a bug report for a bug you've found
-title: "BUG in version [VERSION]"
+title: "[BUG] in version [VERSION]"
 labels: bug
 assignees: ''
 
