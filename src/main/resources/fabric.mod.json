@@ -12,7 +12,7 @@
 		"sources": "https://github.com/LegoRaft/simple-armor-hud",
 		"issues": "https://github.com/LegoRaft/simple-armor-hud/issues"
 	},
-	"license": "GPL-3.0",
+	"license": "LGPL-2.1",
 	"icon": "assets/simple-armor-hud/icon.png",
 	"environment": "*",
 	"entrypoints": {
