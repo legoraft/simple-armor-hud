@@ -35,7 +35,13 @@ public abstract class armorHudMixin {
 		assert client.player != null;
 
 		int h = 68;
-		int i = this.scaledHeight - 55;
+		int i;
+
+		if (config.DOUBLE_HOTBAR) {
+			i = this.scaledHeight - 76;
+		} else {
+			i = this.scaledHeight - 55;
+		}
 
 //		Moves armorhud up if player is underwater
 		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSwimming()) {
