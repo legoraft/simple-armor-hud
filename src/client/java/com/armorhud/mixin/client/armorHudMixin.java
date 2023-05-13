@@ -44,7 +44,7 @@ public abstract class armorHudMixin {
 
 //		Moves armorhud down if player is in creative
 		if (client.player.isCreative()) {
-			i += 14;
+			i += 16;
 		}
 
 //		Moves armorhud up if player is on mount
