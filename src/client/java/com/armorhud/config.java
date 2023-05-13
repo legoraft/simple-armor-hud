@@ -1,4 +1,4 @@
-package com.survivaltweaks;
+package com.armorhud;
 
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
@@ -10,22 +10,16 @@ import java.util.Properties;
 
 public class config {
 
-    public static boolean SURVIVAL_DEBUG_STICK = false;
-    public static boolean NO_EXPENSIVE = false;
-    public static boolean CHEAP_RENAME = false;
+    public static boolean BETTER_MOUNT_HUD = false;
 
-    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("survivaltweaks.properties");
+    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
     public void write(Properties properties) {
-        properties.setProperty("survival_debug_stick", Boolean.toString(SURVIVAL_DEBUG_STICK));
-        properties.setProperty("no_too_expensive", Boolean.toString(NO_EXPENSIVE));
-        properties.setProperty("cheap_rename", Boolean.toString(CHEAP_RENAME));
+        properties.setProperty("better_mount_hud", Boolean.toString(BETTER_MOUNT_HUD));
     }
 
     public void read(Properties properties) {
-        SURVIVAL_DEBUG_STICK = Boolean.parseBoolean(properties.getProperty("survival_debug_stick"));
-        NO_EXPENSIVE = Boolean.parseBoolean(properties.getProperty("no_too_expensive"));
-        CHEAP_RENAME = Boolean.parseBoolean(properties.getProperty("cheap_rename"));
+        BETTER_MOUNT_HUD =  Boolean.parseBoolean(properties.getProperty("better_mount_hud"));
     }
 
     public void save() {
