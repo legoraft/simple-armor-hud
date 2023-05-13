@@ -39,12 +39,12 @@ public abstract class armorHudMixin {
 
 //		Moves armorhud up if player is underwater
 		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSwimming()) {
-			i = this.scaledHeight - 65;
+			i -= 10;
 		}
 
 //		Moves armorhud down if player is in creative
 		if (client.player.isCreative()) {
-			i = this.scaledHeight - 39;
+			i += 14;
 		}
 
 //		Moves armorhud up if player is on mount
@@ -52,16 +52,14 @@ public abstract class armorHudMixin {
 			if (getRiddenEntity().isAlive()) {
 				if (getRiddenEntity().getMaxHealth() > 20) {
 					if (config.BETTER_MOUNT_HUD) {
-						i = this.scaledHeight - 75;
+						i -= 20;
 					} else {
-						i = this.scaledHeight - 65;
+						i -= 10;
 					}
 				}
 				else {
 					if (config.BETTER_MOUNT_HUD) {
-						i = this.scaledHeight - 65;
-					} else {
-						i = this.scaledHeight - 55;
+						i -= 10;
 					}
 				}
 			}
