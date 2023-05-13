@@ -1,10 +1,10 @@
 package com.armorhud.mixin.client;
 
+import com.armorhud.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -51,10 +51,18 @@ public abstract class armorHudMixin {
 		if (client.player.hasVehicle() && getRiddenEntity() != null) {
 			if (getRiddenEntity().isAlive()) {
 				if (getRiddenEntity().getMaxHealth() > 20) {
-					i = this.scaledHeight - 65;
+					if (config.BETTER_MOUNT_HUD) {
+						i = this.scaledHeight - 75;
+					} else {
+						i = this.scaledHeight - 65;
+					}
 				}
 				else {
-					i = this.scaledHeight - 55;
+					if (config.BETTER_MOUNT_HUD) {
+						i = this.scaledHeight - 65;
+					} else {
+						i = this.scaledHeight - 55;
+					}
 				}
 			}
 		}
