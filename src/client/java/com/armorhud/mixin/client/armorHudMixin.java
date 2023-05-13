@@ -40,7 +40,6 @@ public abstract class armorHudMixin {
 //		Moves armorhud up if player is underwater
 		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSwimming()) {
 			i = this.scaledHeight - 65;
-			System.out.println("Moving...");
 		}
 
 //		Moves armorhud down if player is in creative
