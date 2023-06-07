@@ -2,8 +2,8 @@ package com.armorhud.mixin.client;
 
 import com.armorhud.config;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public abstract class armorHudMixin {
 
-	@Shadow protected abstract void renderHotbarItem(MatrixStack matrixStack, int i, int j, float f, PlayerEntity playerEntity, ItemStack itemStack, int k);
-
 	@Shadow @Final private MinecraftClient client;
 
 	@Shadow private int scaledWidth;
@@ -28,9 +26,11 @@ public abstract class armorHudMixin {
 
 	@Shadow protected abstract LivingEntity getRiddenEntity();
 
+	@Shadow protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
+
 	@Inject(at = @At("HEAD"), method = "render")
 
-	private void renderHud(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+	private void renderHud(DrawContext context, float tickDelta, CallbackInfo ci) {
 
 		assert client.player != null;
 
@@ -73,7 +73,7 @@ public abstract class armorHudMixin {
 
 //		Render all armor items from player
 		for (int j = 0; j < 4; j++) {
-			renderHotbarItem(matrices, this.scaledWidth  / 2 + h, i, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
+			renderHotbarItem(context, this.scaledWidth / 2 + h, i, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
 			h -= 15;
 		}
 
