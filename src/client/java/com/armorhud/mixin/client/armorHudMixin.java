@@ -60,12 +60,18 @@ public abstract class armorHudMixin {
 					if (config.BETTER_MOUNT_HUD) {
 						i -= 20;
 					} else {
-						i -= 10;
+						if (client.player.isCreative()) {
+							i -= 26;
+						} else {
+							i -= 10;
+						}
 					}
 				}
 				else {
 					if (config.BETTER_MOUNT_HUD) {
 						i -= 10;
+					} else if (client.player.isCreative()) {
+						i -= 16;
 					}
 				}
 			}
