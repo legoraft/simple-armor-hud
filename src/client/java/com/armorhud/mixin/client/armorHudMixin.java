@@ -56,7 +56,7 @@ public abstract class armorHudMixin {
 //		Moves armorhud up if player is on mount
 		if (client.player.hasVehicle() && getRiddenEntity() != null) {
 			if (getRiddenEntity().isAlive()) {
-				if (getRiddenEntity().getMaxHealth() > 20) {
+				if (getRiddenEntity().getMaxHealth() > 21) {
 					if (config.BETTER_MOUNT_HUD) {
 						i -= 20;
 					} else {
