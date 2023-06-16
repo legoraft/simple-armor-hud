@@ -7,7 +7,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/for%20MC-1.17.x,%201.18.x,%201.19.x,%201.20-green" alt="Minecraft version"/>
     <img src="https://img.shields.io/github/v/release/LegoRaft/simple-armor-hud?color=yellow" alt="Release"/>
-    <img src="https://cf.way2muchnoise.eu/full_517757_downloads.svg" alt="Curseforge downloads"/>
+    <img src="https://img.shields.io/modrinth/dt/tJflAtvJ?label=modrinth"/>
     <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
 </p>
 
