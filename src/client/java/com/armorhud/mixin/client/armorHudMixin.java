@@ -28,9 +28,9 @@ public abstract class armorHudMixin {
 
 	@Shadow protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
 
-	@Inject(at = @At("HEAD"), method = "render")
+	@Inject(at = @At("TAIL"), method = "renderHotbar")
 
-	private void renderHud(DrawContext context, float tickDelta, CallbackInfo ci) {
+	private void renderHud(float tickDelta, DrawContext context, CallbackInfo ci) {
 
 		assert client.player != null;
 
