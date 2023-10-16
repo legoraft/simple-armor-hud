@@ -44,7 +44,7 @@ public abstract class armorHudMixin {
 		}
 
 //		Moves armorhud up if player is underwater
-		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSwimming()) {
+		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative()) {
 			i -= 10;
 		}
 
