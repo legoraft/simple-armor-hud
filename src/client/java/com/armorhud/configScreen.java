@@ -38,7 +38,7 @@ public class configScreen extends SpruceScreen {
 
         this.addDrawableChild(list);
 
-        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 50, this.height - 30), 100, 20, Text.literal("Done"), button -> this.applyChanges()));
+        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.literal("Done"), button -> this.applyChanges()));
     }
 
     @Override
@@ -49,6 +49,10 @@ public class configScreen extends SpruceScreen {
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackgroundTexture(context);
+    }
+
+    public void close() {
+        this.client.setScreen(parent);
     }
 
     public void applyChanges() {
