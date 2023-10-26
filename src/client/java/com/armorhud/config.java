@@ -12,17 +12,20 @@ public class config {
 
     public static boolean BETTER_MOUNT_HUD = false;
     public static boolean DOUBLE_HOTBAR = false;
+    public static boolean ARMOR_HUD = true;
 
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
     public void write(Properties properties) {
         properties.setProperty("better_mount_hud", Boolean.toString(BETTER_MOUNT_HUD));
         properties.setProperty("double_hotbar", Boolean.toString(DOUBLE_HOTBAR));
+        properties.setProperty("armor_hud", Boolean.toString(ARMOR_HUD));
     }
 
     public void read(Properties properties) {
         BETTER_MOUNT_HUD =  Boolean.parseBoolean(properties.getProperty("better_mount_hud"));
         DOUBLE_HOTBAR =  Boolean.parseBoolean(properties.getProperty("double_hotbar"));
+        ARMOR_HUD = Boolean.parseBoolean(properties.getProperty("armor_hud"));
     }
 
     public void save() {
