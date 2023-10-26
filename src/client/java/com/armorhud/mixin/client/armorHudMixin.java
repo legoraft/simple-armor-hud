@@ -34,7 +34,6 @@ public abstract class armorHudMixin {
 
 		renderArmor(context, tickDelta);
 		moveArmor();
-
 	}
 
 	private void renderArmor(DrawContext context, float tickDelta) {
@@ -59,7 +58,7 @@ public abstract class armorHudMixin {
 //		Moves armorhud down if player is in creative
 		armorHeight += (client.player.isCreative() ? 16 : 0);
 
-//		Moves armorhud up if player is on mount
+//		Moves armorhud up if player is on mount, like horse
 		if (client.player.hasVehicle() && getRiddenEntity() != null) {
 			moveArmorHorse();
 		}
@@ -67,7 +66,9 @@ public abstract class armorHudMixin {
 
 	private void moveArmorHorse() {
 
+//		Check if entity player is riding is alive, like a horse
 		if (getRiddenEntity().isAlive()) {
+//		If horse health is 21, it still displays 10 hearts
 			if (getRiddenEntity().getMaxHealth() > 21) {
 				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
 					armorHeight -= 20;
@@ -75,6 +76,7 @@ public abstract class armorHudMixin {
 					armorHeight -= (client.player.isCreative() ? 26 : 10);
 				}
 			}
+//		Armor hud only has to be moved up if better mount hud is enabled or player is in creative
 			else {
 				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
 					armorHeight -= 10;
@@ -83,7 +85,6 @@ public abstract class armorHudMixin {
 				}
 			}
 		}
-
 	}
 
 }
