@@ -19,13 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class armorHudMixin {
 
 	@Shadow @Final private MinecraftClient client;
-
 	@Shadow private int scaledWidth;
-
 	@Shadow private int scaledHeight;
-
 	@Shadow protected abstract LivingEntity getRiddenEntity();
-
 	@Shadow protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
 
 	int armorHeight;
@@ -51,12 +47,9 @@ public abstract class armorHudMixin {
 	}
 
 	private void moveArmor() {
+
 //		Moves armorhud up if player uses double hotbar
-		if (config.DOUBLE_HOTBAR) {
-			armorHeight = this.scaledHeight - 76;
-		} else {
-			armorHeight = this.scaledHeight - 55;
-		}
+		armorHeight = this.scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
 
 //		Moves armorhud up if player is underwater
 		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative()) {
@@ -64,33 +57,33 @@ public abstract class armorHudMixin {
 		}
 
 //		Moves armorhud down if player is in creative
-		if (client.player.isCreative()) {
-			armorHeight += 16;
-		}
+		armorHeight += (client.player.isCreative() ? 16 : 0);
 
 //		Moves armorhud up if player is on mount
 		if (client.player.hasVehicle() && getRiddenEntity() != null) {
-			if (getRiddenEntity().isAlive()) {
-				if (getRiddenEntity().getMaxHealth() > 21) {
-					if (config.BETTER_MOUNT_HUD) {
-						armorHeight -= 20;
-					} else {
-						if (client.player.isCreative()) {
-							armorHeight -= 26;
-						} else {
-							armorHeight -= 10;
-						}
-					}
+			moveArmorHorse();
+		}
+	}
+
+	private void moveArmorHorse() {
+
+		if (getRiddenEntity().isAlive()) {
+			if (getRiddenEntity().getMaxHealth() > 21) {
+				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
+					armorHeight -= 20;
+				} else {
+					armorHeight -= (client.player.isCreative() ? 26 : 10);
 				}
-				else {
-					if (config.BETTER_MOUNT_HUD) {
-						armorHeight -= 10;
-					} else if (client.player.isCreative()) {
-						armorHeight -= 16;
-					}
+			}
+			else {
+				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
+					armorHeight -= 10;
+				} else if (client.player.isCreative()) {
+					armorHeight -= 16;
 				}
 			}
 		}
+
 	}
 
 }
