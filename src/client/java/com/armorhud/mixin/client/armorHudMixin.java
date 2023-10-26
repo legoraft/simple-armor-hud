@@ -31,6 +31,7 @@ public abstract class armorHudMixin {
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 
 	private void renderHud(float tickDelta, DrawContext context, CallbackInfo ci) {
+		if(!config.ARMOR_HUD) { return; }
 
 		assert client.player != null;
 
