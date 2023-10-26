@@ -28,30 +28,44 @@ public abstract class armorHudMixin {
 
 	@Shadow protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
 
-	@Inject(at = @At("TAIL"), method = "renderHotbar")
+	int armorHeight;
 
+	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(float tickDelta, DrawContext context, CallbackInfo ci) {
 		if(!config.ARMOR_HUD) { return; }
 
 		assert client.player != null;
 
-		int h = 68;
-		int i;
+		renderArmor(context, tickDelta);
+		moveArmor();
 
+	}
+
+	private void renderArmor(DrawContext context, float tickDelta) {
+		int armorX = 68;
+
+		for (int j = 0; j < 4; j++) {
+			renderHotbarItem(context, this.scaledWidth / 2 + armorX, armorHeight, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
+			armorX -= 15;
+		}
+	}
+
+	private void moveArmor() {
+//		Moves armorhud up if player uses double hotbar
 		if (config.DOUBLE_HOTBAR) {
-			i = this.scaledHeight - 76;
+			armorHeight = this.scaledHeight - 76;
 		} else {
-			i = this.scaledHeight - 55;
+			armorHeight = this.scaledHeight - 55;
 		}
 
 //		Moves armorhud up if player is underwater
 		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative()) {
-			i -= 10;
+			armorHeight -= 10;
 		}
 
 //		Moves armorhud down if player is in creative
 		if (client.player.isCreative()) {
-			i += 16;
+			armorHeight += 16;
 		}
 
 //		Moves armorhud up if player is on mount
@@ -59,31 +73,24 @@ public abstract class armorHudMixin {
 			if (getRiddenEntity().isAlive()) {
 				if (getRiddenEntity().getMaxHealth() > 21) {
 					if (config.BETTER_MOUNT_HUD) {
-						i -= 20;
+						armorHeight -= 20;
 					} else {
 						if (client.player.isCreative()) {
-							i -= 26;
+							armorHeight -= 26;
 						} else {
-							i -= 10;
+							armorHeight -= 10;
 						}
 					}
 				}
 				else {
 					if (config.BETTER_MOUNT_HUD) {
-						i -= 10;
+						armorHeight -= 10;
 					} else if (client.player.isCreative()) {
-						i -= 16;
+						armorHeight -= 16;
 					}
 				}
 			}
 		}
-
-//		Render all armor items from player
-		for (int j = 0; j < 4; j++) {
-			renderHotbarItem(context, this.scaledWidth / 2 + h, i, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
-			h -= 15;
-		}
-
 	}
 
 }
