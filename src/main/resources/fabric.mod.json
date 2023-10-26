@@ -18,7 +18,8 @@
 	"entrypoints": {
 		"client": [
 			"com.armorhud.armorHud"
-		]
+		],
+		"modmenu": [ "com.armorhud.armorHudModMenu" ]
 	},
 	"mixins": [
 		"simple-armor-hud.mixins.json",
