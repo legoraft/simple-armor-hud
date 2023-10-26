@@ -25,10 +25,10 @@ _Moves armor up underwater_
 If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls).
 
 ### Dependencies
-Simple armor hud doesn't require any other mods.
+Simple armor hud requires the [Fabric API](https://modrinth.com/mod/fabric-api)
 
 ### Installation
-Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud), [Releases](https://github.com/LegoRaft/simple-armor-hud/releases) and on [Curseforge](https://www.curseforge.com/minecraft/mc-mods/simple-armor-hud). After downloading, you can put the `.jar` file in your `mods` folder. If you don't have fabric installed, take a look at this [installation tutorial](https://fabricmc.net/wiki/install) _Note: Simple armor hud **doesn't require** the Fabric API_
+Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud), [Releases](https://github.com/LegoRaft/simple-armor-hud/releases) and on [Curseforge](https://www.curseforge.com/minecraft/mc-mods/simple-armor-hud). After downloading, you can put the `.jar` file in your `mods` folder. If you don't have fabric installed, take a look at this [installation tutorial](https://fabricmc.net/wiki/install) _Note: Simple armor hud **requires** the Fabric API_
 
 ### Build
 To build from source, follow these steps:
