@@ -13,7 +13,7 @@ public class keyBindings {
         armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.armorhud.armorvisible",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_K,
+                GLFW.GLFW_DONT_CARE,
                 "category.armorhud.toggles"
                 ));
     }
