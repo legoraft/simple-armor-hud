@@ -1,5 +1,6 @@
-package com.armorhud;
+package com.armorhud.config;
 
+import com.armorhud.armorHud;
 import dev.lambdaurora.spruceui.Position;
 import dev.lambdaurora.spruceui.option.SpruceBooleanOption;
 import dev.lambdaurora.spruceui.option.SpruceOption;
@@ -25,9 +26,9 @@ public class configScreen extends SpruceScreen {
         super(Text.literal("Armorhud test GUI"));
         this.parent = parent;
 
-        this.doubleHotbarToggle = new SpruceBooleanOption("Double hotbar", () -> config.DOUBLE_HOTBAR, newValue -> config.DOUBLE_HOTBAR = newValue, Text.literal("Toggles double hotbar config"));
-        this.betterMountHudToggle = new SpruceBooleanOption("Better mount HUD", () -> config.BETTER_MOUNT_HUD, newValue -> config.BETTER_MOUNT_HUD = newValue, Text.literal("Toggles the better mount hud config"));
-        this.armorHudToggle = new SpruceBooleanOption("Armor visible", () -> config.ARMOR_HUD, newValue -> config.ARMOR_HUD = newValue, Text.literal("Toggles the armorhud on or off"));
+        this.doubleHotbarToggle = new SpruceBooleanOption("config.doublehotbar", () -> config.DOUBLE_HOTBAR, newValue -> config.DOUBLE_HOTBAR = newValue, Text.translatable("config.description.doublehotbar"));
+        this.betterMountHudToggle = new SpruceBooleanOption("config.bettermounthud", () -> config.BETTER_MOUNT_HUD, newValue -> config.BETTER_MOUNT_HUD = newValue, Text.translatable("config.description.bettermounthud"));
+        this.armorHudToggle = new SpruceBooleanOption("config.armorvisible", () -> config.ARMOR_HUD, newValue -> config.ARMOR_HUD = newValue, Text.translatable("config.description.armorvisible"));
     }
 
     @Override
@@ -40,7 +41,7 @@ public class configScreen extends SpruceScreen {
 
         this.addDrawableChild(list);
 
-        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.literal("Done"), button -> this.applyChanges()));
+        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> this.applyChanges()));
     }
 
     @Override

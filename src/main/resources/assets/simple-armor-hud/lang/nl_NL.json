@@ -1,0 +1,13 @@
+{
+  "key.armorhud.armorvisible": "Zet harnas-hud aan/uit",
+  "category.armorhud.toggles": "Simple armor hud",
+
+  "config.doublehotbar": "Double Hotbar",
+  "config.bettermounthud": "Better Mount Hud",
+  "config.armorvisible": "Harnas-hud zichtbaar",
+  "config.done": "Gereed",
+
+  "config.description.doublehotbar": "Zorgt voor compatibiliteit met de double hotbar mod",
+  "config.description.bettermounthud": "Maakt armor hud compatibel met de better mount hud mod",
+  "config.description.armorvisible": "Zet de zichtbaarheid van het harnas aan of uit"
+}

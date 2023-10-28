@@ -1,4 +1,4 @@
-package com.armorhud;
+package com.armorhud.config;
 
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
