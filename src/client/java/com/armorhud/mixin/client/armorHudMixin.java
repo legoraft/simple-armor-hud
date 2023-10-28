@@ -1,6 +1,6 @@
 package com.armorhud.mixin.client;
 
-import com.armorhud.config;
+import com.armorhud.config.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;

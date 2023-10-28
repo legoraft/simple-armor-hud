@@ -1,5 +1,6 @@
-package com.armorhud;
+package com.armorhud.config;
 
+import com.armorhud.armorHud;
 import dev.lambdaurora.spruceui.Position;
 import dev.lambdaurora.spruceui.option.SpruceBooleanOption;
 import dev.lambdaurora.spruceui.option.SpruceOption;

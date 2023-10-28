@@ -19,7 +19,7 @@
 		"client": [
 			"com.armorhud.armorHud"
 		],
-		"modmenu": [ "com.armorhud.armorHudModMenu" ]
+		"modmenu": [ "com.armorhud.util.armorHudModMenu" ]
 	},
 	"mixins": [
 		"simple-armor-hud.mixins.json",
