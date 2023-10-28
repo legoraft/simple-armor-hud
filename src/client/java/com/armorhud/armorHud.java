@@ -1,6 +1,7 @@
 package com.armorhud;
 
 import com.armorhud.config.config;
+import com.armorhud.util.armorHudRegistries;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
@@ -12,7 +13,7 @@ public class armorHud implements ClientModInitializer {
     public void onInitializeClient() {
         System.out.println("Simple Armor Hud loaded!");
         CONFIG.load();
-        keyBindings.registerKeys();
+        armorHudRegistries.registerArmorHud();
         handleKeys();
     }
 
