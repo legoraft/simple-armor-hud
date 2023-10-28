@@ -1,6 +1,8 @@
 package com.armorhud;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.text.Text;
 
 public class armorHud implements ClientModInitializer {
 
@@ -10,5 +12,15 @@ public class armorHud implements ClientModInitializer {
     public void onInitializeClient() {
         System.out.println("Simple Armor Hud loaded!");
         CONFIG.load();
+        keyBindings.registerKeys();
+        handleKeys();
+    }
+
+    public void handleKeys() {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (keyBindings.armorHudToggle.wasPressed()) {
+                config.ARMOR_HUD = !config.ARMOR_HUD;
+            }
+        });
     }
 }
