@@ -14,7 +14,7 @@
 ## Information
 
 ### Features
-This mod shows your armor above the foodbar in the in-game hud. It also moves armor up when underwater and down when in creative and has a few config options for compatibility with other mods.
+This mod shows your armor above the foodbar in the in-game hud. It also moves armor up when underwater and down when in creative and has a few config options for compatibility with other mods. You can toggle the armor hud on or off with a keybind, configurable through the normal menu.
 
 <img src="https://user-images.githubusercontent.com/50689727/130084592-5a35579a-f300-4c6e-b6ad-9b6bd620904c.png"  alt="armor hud third person" width="640"/> <br>
 _Shows armor you're currently wearing_
@@ -23,6 +23,9 @@ _Moves armor up underwater_
 
 ### Bugs
 If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls).
+
+### Translations
+This mod is available with english and dutch translations, if you know any other translations, create a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) with a new [lang](https://github.com/legoraft/simple-armor-hud/tree/main/src/main/resources/assets/simple-armor-hud/lang) file with your translation.
 
 ### Dependencies
 Simple armor hud requires the [Fabric API](https://modrinth.com/mod/fabric-api)
