@@ -11,7 +11,7 @@ public class keyBindings {
 
     public static void registerKeys() {
         armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.armorhud.toggle",
+                "key.armorhud.armorvisible",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_K,
                 "category.armorhud.toggles"
