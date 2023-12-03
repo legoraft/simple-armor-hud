@@ -11,6 +11,8 @@
     <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
 </p>
 
+(Fork with properly centered armor display)
+
 ## Information
 This mod shows your armor above the foodbar in the in-game hud. It also moves armor up when underwater and down when in creative and has a few config options for compatibility with other mods. You can toggle the armor hud on or off with a keybind, configurable through the normal menu.
 
