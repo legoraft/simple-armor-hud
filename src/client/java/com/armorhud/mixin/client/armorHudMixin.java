@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,8 +23,6 @@ public abstract class armorHudMixin {
 	@Shadow private int scaledWidth;
 	@Shadow private int scaledHeight;
 	@Shadow protected abstract LivingEntity getRiddenEntity();
-	@Shadow protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
-
 	int armorHeight;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
@@ -36,15 +35,48 @@ public abstract class armorHudMixin {
 		moveArmor();
 	}
 
+	@Unique
 	private void renderArmor(DrawContext context, float tickDelta) {
-		int armorX = 68;
+		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the with of the last sprite.
+		final int armorWidth = 15;
+		final int barWidth = armorWidth * 4;
+		float hungerX = scaledWidth / 2f + 91;
+		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
+		x += 2; // This makes it look better because the helmet is thinner.
 
 		for (int j = 0; j < 4; j++) {
-			renderHotbarItem(context, this.scaledWidth / 2 + armorX, armorHeight, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
-			armorX -= 15;
+			x -= armorWidth;
+			renderArmorPiece(context, x, armorHeight, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
 		}
 	}
 
+	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
+	@Unique
+	private void renderArmorPiece(DrawContext context, float x, float y, float tickDelta, PlayerEntity player, ItemStack stack, int seed) {
+		if (stack.isEmpty()) return;
+
+		// Magic
+		float f = (float)stack.getBobbingAnimationTime() - tickDelta;
+		context.getMatrices().push();
+		context.getMatrices().translate(x, y, 0);
+
+		if (f > 0) {
+			float g = 1 + f / 5;
+			context.getMatrices().push();
+			context.getMatrices().translate(8, 12, 0);
+			context.getMatrices().scale(1 / g, (g + 1) / 2, 1);
+			context.getMatrices().translate(-8, -12, 0);
+		}
+		context.drawItem(player, stack, 0, 0, seed);
+		if (f > 0) {
+			context.getMatrices().pop();
+		}
+
+		context.drawItemInSlot(this.client.textRenderer, stack, 0,0);
+		context.getMatrices().pop();
+	}
+
+	@Unique
 	private void moveArmor() {
 
 //		Moves armorhud up if player uses double hotbar
