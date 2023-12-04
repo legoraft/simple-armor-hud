@@ -23,7 +23,8 @@ public abstract class armorHudMixin {
 	@Shadow private int scaledWidth;
 	@Shadow private int scaledHeight;
 	@Shadow protected abstract LivingEntity getRiddenEntity();
-	int armorHeight;
+
+	@Unique int armorHeight;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(float tickDelta, DrawContext context, CallbackInfo ci) {
