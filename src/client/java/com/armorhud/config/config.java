@@ -16,7 +16,7 @@ public class config {
 
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
-    public void write(Properties properties) {
+    public static void write(Properties properties) {
         properties.setProperty("better_mount_hud", Boolean.toString(BETTER_MOUNT_HUD));
         properties.setProperty("double_hotbar", Boolean.toString(DOUBLE_HOTBAR));
         properties.setProperty("armor_hud", Boolean.toString(ARMOR_HUD));
@@ -28,7 +28,7 @@ public class config {
         ARMOR_HUD = Boolean.parseBoolean(properties.getProperty("armor_hud"));
     }
 
-    public void save() {
+    public static void save() {
         Properties properties = new Properties();
         write(properties);
         if (!Files.exists(CONFIG_PATH)) {
