@@ -38,7 +38,7 @@ public abstract class armorHudMixin {
 
 	@Unique
 	private void renderArmor(DrawContext context, float tickDelta) {
-		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the with of the last sprite.
+		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
 		final int armorWidth = 15;
 		final int barWidth = armorWidth * 4;
 		float hungerX = scaledWidth / 2f + 91;
