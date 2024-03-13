@@ -18,6 +18,7 @@ public class configScreen extends SpruceScreen {
     private final SpruceOption doubleHotbarToggle;
     private final SpruceOption betterMountHudToggle;
     private final SpruceOption armorHudToggle;
+    private final SpruceOption rightToLeftToggle;
 
     public configScreen(@Nullable Screen parent) {
         super(Text.literal("Armorhud test GUI"));
@@ -26,6 +27,7 @@ public class configScreen extends SpruceScreen {
         this.doubleHotbarToggle = new SpruceBooleanOption("config.doublehotbar", () -> config.DOUBLE_HOTBAR, newValue -> config.DOUBLE_HOTBAR = newValue, Text.translatable("config.description.doublehotbar"));
         this.betterMountHudToggle = new SpruceBooleanOption("config.bettermounthud", () -> config.BETTER_MOUNT_HUD, newValue -> config.BETTER_MOUNT_HUD = newValue, Text.translatable("config.description.bettermounthud"));
         this.armorHudToggle = new SpruceBooleanOption("config.armorvisible", () -> config.ARMOR_HUD, newValue -> config.ARMOR_HUD = newValue, Text.translatable("config.description.armorvisible"));
+        this.rightToLeftToggle = new SpruceBooleanOption("config.righttoleft", () -> config.RTL, newValue -> config.RTL = newValue, Text.translatable("config.description.righttoleft"));
     }
 
     @Override
@@ -34,7 +36,7 @@ public class configScreen extends SpruceScreen {
 
         SpruceOptionListWidget list = new SpruceOptionListWidget(Position.of(0, 34), this.width, this.height - 69);
         list.addOptionEntry(this.armorHudToggle, this.doubleHotbarToggle);
-        list.addOptionEntry(this.betterMountHudToggle, null);
+        list.addOptionEntry(this.betterMountHudToggle, this.rightToLeftToggle);
 
         this.addDrawableChild(list);
 

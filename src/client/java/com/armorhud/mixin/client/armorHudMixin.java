@@ -47,7 +47,15 @@ public abstract class armorHudMixin {
 
 		for (int j = 0; j < 4; j++) {
 			x -= armorWidth;
-			renderArmorPiece(context, x, armorHeight, tickDelta, client.player, client.player.getInventory().getArmorStack(j), 1);
+			int armorPiece;
+
+			if (config.RTL) {
+				armorPiece = 3 - j;
+			} else {
+				armorPiece = j;
+			}
+
+			renderArmorPiece(context, x, armorHeight, tickDelta, client.player, client.player.getInventory().getArmorStack(armorPiece), 1);
 		}
 	}
 
