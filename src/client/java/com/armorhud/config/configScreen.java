@@ -1,6 +1,5 @@
 package com.armorhud.config;
 
-import com.armorhud.armorHud;
 import dev.lambdaurora.spruceui.Position;
 import dev.lambdaurora.spruceui.option.SpruceBooleanOption;
 import dev.lambdaurora.spruceui.option.SpruceOption;
@@ -12,8 +11,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Properties;
-
 public class configScreen extends SpruceScreen {
 
     private final Screen parent;
@@ -21,6 +18,7 @@ public class configScreen extends SpruceScreen {
     private final SpruceOption doubleHotbarToggle;
     private final SpruceOption betterMountHudToggle;
     private final SpruceOption armorHudToggle;
+    private final SpruceOption rightToLeftToggle;
 
     public configScreen(@Nullable Screen parent) {
         super(Text.literal("Armorhud test GUI"));
@@ -29,6 +27,7 @@ public class configScreen extends SpruceScreen {
         this.doubleHotbarToggle = new SpruceBooleanOption("config.doublehotbar", () -> config.DOUBLE_HOTBAR, newValue -> config.DOUBLE_HOTBAR = newValue, Text.translatable("config.description.doublehotbar"));
         this.betterMountHudToggle = new SpruceBooleanOption("config.bettermounthud", () -> config.BETTER_MOUNT_HUD, newValue -> config.BETTER_MOUNT_HUD = newValue, Text.translatable("config.description.bettermounthud"));
         this.armorHudToggle = new SpruceBooleanOption("config.armorvisible", () -> config.ARMOR_HUD, newValue -> config.ARMOR_HUD = newValue, Text.translatable("config.description.armorvisible"));
+        this.rightToLeftToggle = new SpruceBooleanOption("config.righttoleft", () -> config.RTL, newValue -> config.RTL = newValue, Text.translatable("config.description.righttoleft"));
     }
 
     @Override
@@ -37,11 +36,11 @@ public class configScreen extends SpruceScreen {
 
         SpruceOptionListWidget list = new SpruceOptionListWidget(Position.of(0, 34), this.width, this.height - 69);
         list.addOptionEntry(this.armorHudToggle, this.doubleHotbarToggle);
-        list.addOptionEntry(this.betterMountHudToggle, null);
+        list.addOptionEntry(this.betterMountHudToggle, this.rightToLeftToggle);
 
         this.addDrawableChild(list);
 
-        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> this.applyChanges()));
+        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> close()));
     }
 
     @Override
@@ -55,13 +54,6 @@ public class configScreen extends SpruceScreen {
     }
 
     public void close() {
-        this.client.setScreen(parent);
-    }
-
-    public void applyChanges() {
-        config config = armorHud.CONFIG;
-        Properties properties = new Properties();
-        config.write(properties);
         config.save();
         this.client.setScreen(parent);
     }

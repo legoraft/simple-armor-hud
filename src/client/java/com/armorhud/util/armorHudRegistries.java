@@ -6,6 +6,7 @@ public class armorHudRegistries {
 
     public static void registerArmorHud() {
         keyBindings.registerKeys();
+        modDetect.detect();
     }
 
 }

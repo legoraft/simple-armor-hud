@@ -5,9 +5,11 @@
   "config.doublehotbar": "Double Hotbar",
   "config.bettermounthud": "Better Mount Hud",
   "config.armorvisible": "Armor visible",
+  "config.righttoleft": "Right to left display",
   "config.done": "Done",
 
   "config.description.doublehotbar": "Ensures complatibility between double hotbar and armor hud",
   "config.description.bettermounthud": "Makes better mount hud compatible",
-  "config.description.armorvisible": "Toggles the visibility of the armor hud"
+  "config.description.armorvisible": "Toggles the visibility of the armor hud",
+  "config.description.righttoleft": "Displays the armor from right to left instead of left to right"
 }
