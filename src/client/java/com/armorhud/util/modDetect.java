@@ -15,6 +15,6 @@ public class modDetect {
             System.out.println("Double hotbar found!");
         }
 
+        config.save();
     }
-
 }

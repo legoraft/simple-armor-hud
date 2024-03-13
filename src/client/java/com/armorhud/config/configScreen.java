@@ -38,7 +38,7 @@ public class configScreen extends SpruceScreen {
 
         this.addDrawableChild(list);
 
-        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> config.save()));
+        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> close()));
     }
 
     @Override
@@ -52,6 +52,7 @@ public class configScreen extends SpruceScreen {
     }
 
     public void close() {
+        config.save();
         this.client.setScreen(parent);
     }
 
