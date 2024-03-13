@@ -1,6 +1,5 @@
 package com.armorhud.config;
 
-import com.armorhud.armorHud;
 import dev.lambdaurora.spruceui.Position;
 import dev.lambdaurora.spruceui.option.SpruceBooleanOption;
 import dev.lambdaurora.spruceui.option.SpruceOption;
@@ -11,8 +10,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Properties;
 
 public class configScreen extends SpruceScreen {
 
@@ -41,7 +38,7 @@ public class configScreen extends SpruceScreen {
 
         this.addDrawableChild(list);
 
-        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> this.applyChanges()));
+        this.addDrawableChild(new SpruceButtonWidget(Position.of(this.width / 2 - 100, this.height - 30), 200, 20, Text.translatable("config.done"), button -> config.save()));
     }
 
     @Override
@@ -55,14 +52,6 @@ public class configScreen extends SpruceScreen {
     }
 
     public void close() {
-        this.client.setScreen(parent);
-    }
-
-    public void applyChanges() {
-        config config = armorHud.CONFIG;
-        Properties properties = new Properties();
-        config.write(properties);
-        config.save();
         this.client.setScreen(parent);
     }
 
