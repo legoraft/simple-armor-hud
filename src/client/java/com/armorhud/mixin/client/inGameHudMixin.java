@@ -20,7 +20,7 @@ public abstract class inGameHudMixin {
         PlayerEntity playerEntity = this.getCameraPlayer();
         assert playerEntity != null;
 
-        if (config.DISABLE_ARMOR) {
+        if (config.DISABLE_ARMOR_BAR) {
             return 0;
         } else {
             return playerEntity.getArmor();
