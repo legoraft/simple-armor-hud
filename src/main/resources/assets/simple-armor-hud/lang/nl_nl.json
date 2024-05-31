@@ -5,11 +5,8 @@
   "config.doublehotbar": "Double Hotbar",
   "config.bettermounthud": "Better Mount Hud",
   "config.armorvisible": "Harnas-hud zichtbaar",
-  "config.righttoleft": "Rechts naar links display",
-  "config.done": "Gereed",
+  "config.disablearmorbar": "Harnasbalk uitzetten",
 
-  "config.description.doublehotbar": "Zorgt voor compatibiliteit met de double hotbar mod",
-  "config.description.bettermounthud": "Maakt armor hud compatibel met de better mount hud mod",
-  "config.description.armorvisible": "Zet de zichtbaarheid van het harnas aan of uit",
-  "config.description.righttoleft": "Laat de harnas-hud van rechts naar links zien in plaats van links naar rechts"
+  "config.righttoleft": "Rechts naar links display",
+  "config.done": "Gereed"
 }
