@@ -20,24 +20,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class armorHudMixin {
 
 	@Shadow @Final private MinecraftClient client;
-	@Shadow private int scaledWidth;
-	@Shadow private int scaledHeight;
+
 	@Shadow protected abstract LivingEntity getRiddenEntity();
 
 	@Unique int armorHeight;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
-	private void renderHud(float tickDelta, DrawContext context, CallbackInfo ci) {
+	private void renderHud(DrawContext context, float tickDelta, CallbackInfo ci) {
 		if(!config.ARMOR_HUD) { return; }
 
 		assert client.player != null;
 
 		renderArmor(context, tickDelta);
-		moveArmor();
+		moveArmor(context);
 	}
 
 	@Unique
 	private void renderArmor(DrawContext context, float tickDelta) {
+		int scaledWidth = context.getScaledWindowWidth();
+
 		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
 		final int armorWidth = 15;
 		final int barWidth = armorWidth * 4;
@@ -86,10 +87,11 @@ public abstract class armorHudMixin {
 	}
 
 	@Unique
-	private void moveArmor() {
+	private void moveArmor(DrawContext context) {
+		int scaledHeight = context.getScaledWindowHeight();
 
 //		Moves armorhud up if player uses double hotbar
-		armorHeight = this.scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
+		armorHeight = scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
 
 //		Moves armorhud up if player is underwater
 		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative()) {

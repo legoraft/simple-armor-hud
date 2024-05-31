@@ -8,6 +8,7 @@ import org.lwjgl.glfw.GLFW;
 public class keyBindings {
 
     public static KeyBinding armorHudToggle;
+    public static KeyBinding configTestToggle;
 
     public static void registerKeys() {
         armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -16,6 +17,13 @@ public class keyBindings {
                 GLFW.GLFW_DONT_CARE,
                 "category.armorhud.toggles"
                 ));
+
+        configTestToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.config.configtoggle",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_DONT_CARE,
+                "category.armorhud.toggles"
+        ));
     }
 
 }
