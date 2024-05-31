@@ -14,7 +14,7 @@ public class config {
     public static boolean DOUBLE_HOTBAR = false;
     public static boolean ARMOR_HUD = true;
     public static boolean RTL = false;
-    public static boolean DISABLE_ARMOR = false;
+    public static boolean DISABLE_ARMOR_BAR = false;
 
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
@@ -23,7 +23,7 @@ public class config {
         properties.setProperty("double_hotbar", Boolean.toString(DOUBLE_HOTBAR));
         properties.setProperty("armor_hud", Boolean.toString(ARMOR_HUD));
         properties.setProperty("right_to_left", Boolean.toString(RTL));
-        properties.setProperty("disable_armor", Boolean.toString(DISABLE_ARMOR));
+        properties.setProperty("disable_armor_bar", Boolean.toString(DISABLE_ARMOR_BAR));
     }
 
     public void read(Properties properties) {
@@ -31,7 +31,7 @@ public class config {
         DOUBLE_HOTBAR =  Boolean.parseBoolean(properties.getProperty("double_hotbar"));
         ARMOR_HUD = Boolean.parseBoolean(properties.getProperty("armor_hud"));
         RTL = Boolean.parseBoolean(properties.getProperty("right_to_left"));
-        DISABLE_ARMOR = Boolean.parseBoolean(properties.getProperty("disable_armor"));
+        DISABLE_ARMOR_BAR = Boolean.parseBoolean(properties.getProperty("disable_armor_bar"));
     }
 
     public static void save() {

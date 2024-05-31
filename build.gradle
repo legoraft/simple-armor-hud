@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 	
 }
@@ -39,7 +39,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	include modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}")
+//	include modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}")
 
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
