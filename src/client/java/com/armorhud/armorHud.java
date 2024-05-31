@@ -5,9 +5,12 @@ import com.armorhud.config.fabricScreen;
 import com.armorhud.util.armorHudRegistries;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 
 public class armorHud implements ClientModInitializer {
 
+    Screen currentScreen = MinecraftClient.getInstance().currentScreen;
     public static final config CONFIG = new config();
 
     @Override
@@ -25,7 +28,7 @@ public class armorHud implements ClientModInitializer {
             }
 
             if (keyBindings.configTestToggle.wasPressed()) {
-                client.setScreen(new fabricScreen());
+                client.setScreen(new fabricScreen(currentScreen));
             }
         });
     }
