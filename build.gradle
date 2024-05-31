@@ -39,8 +39,6 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-//	include modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}")
-
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
