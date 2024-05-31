@@ -37,39 +37,40 @@ public class config {
     public static void save() {
         Properties properties = new Properties();
         write(properties);
+
         if (!Files.exists(CONFIG_PATH)) {
             try {
                 Files.createFile(CONFIG_PATH);
             } catch (IOException e) {
                 LogManager.getLogger("Simple Survival Tweaks").error("Failed to create config file");
-                e.printStackTrace();
             }
         }
+
         try {
             properties.store(Files.newOutputStream(CONFIG_PATH), "Simple Survival Tweaks config file");
         } catch (IOException e) {
             LogManager.getLogger("Simple Survival Tweaks").error("Failed to write config");
-            e.printStackTrace();
         }
     }
 
     public void load() {
         Properties properties = new Properties();
+
         if (!Files.exists(CONFIG_PATH)) {
             try {
                 Files.createFile(CONFIG_PATH);
                 save();
             } catch (IOException e) {
                 LogManager.getLogger("Simple Survival Tweaks").error("Failed to create config file");
-                e.printStackTrace();
             }
         }
+
         try {
             properties.load(Files.newInputStream(CONFIG_PATH));
         } catch (IOException e) {
             LogManager.getLogger("Simple Survival Tweaks").error("Failed to read config");
-            e.printStackTrace();
         }
+
         read(properties);
     }
 
