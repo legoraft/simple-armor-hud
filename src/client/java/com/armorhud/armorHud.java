@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screen.Screen;
 
 public class armorHud implements ClientModInitializer {
 
-    Screen currentScreen = MinecraftClient.getInstance().currentScreen;
     public static final config CONFIG = new config();
 
     @Override
@@ -25,10 +24,6 @@ public class armorHud implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (keyBindings.armorHudToggle.wasPressed()) {
                 config.ARMOR_HUD = !config.ARMOR_HUD;
-            }
-
-            if (keyBindings.configTestToggle.wasPressed()) {
-                client.setScreen(new fabricScreen(currentScreen));
             }
         });
     }

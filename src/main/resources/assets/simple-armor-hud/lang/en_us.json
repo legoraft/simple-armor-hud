@@ -6,6 +6,7 @@
   "config.bettermounthud": "Better Mount Hud",
   "config.armorvisible": "Armor visible",
   "config.righttoleft": "Right to left display",
+  "config.title": "Armor hud config screen",
   "config.done": "Done",
 
   "config.description.doublehotbar": "Ensures complatibility between double hotbar and armor hud",

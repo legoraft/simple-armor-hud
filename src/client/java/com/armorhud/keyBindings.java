@@ -17,13 +17,6 @@ public class keyBindings {
                 GLFW.GLFW_DONT_CARE,
                 "category.armorhud.toggles"
                 ));
-
-        configTestToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.config.configtoggle",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_DONT_CARE,
-                "category.armorhud.toggles"
-        ));
     }
 
 }
