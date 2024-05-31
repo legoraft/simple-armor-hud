@@ -1,32 +1,47 @@
 package com.armorhud.config;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.*;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.text.Text;
 
-public class fabricScreen extends Screen {
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class fabricScreen extends GameOptionsScreen {
 
     public Screen parent;
 
     public fabricScreen(Screen parent) {
-        super(Text.translatable("config.title"));
+        super(parent, null, Text.translatable("config.title"));
 
         this.parent = parent;
     }
 
-    public ButtonWidget doubleHotbarToggle;
+    public CyclingButtonWidget doubleHotbarToggle;
+    public CyclingButtonWidget betterMountHudToggle;
+    private OptionListWidget optionListWidget;
 
     @Override
     protected void init() {
-        doubleHotbarToggle = ButtonWidget.builder(Text.of(Text.translatable("config.doublehotbar")), button -> {
-            config.DOUBLE_HOTBAR = !config.DOUBLE_HOTBAR;
-        })
-                .dimensions(width / 2 - 205, 20, 200, 20)
-                .tooltip(Tooltip.of(Text.translatable("config.description.doublehotbar")))
-                .build();
+        this.optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this.height, this));
 
-        addDrawableChild(doubleHotbarToggle);
+        doubleHotbarToggle = CyclingButtonWidget.onOffBuilder(config.DOUBLE_HOTBAR)
+                .build(Text.translatable("config.doublehotbar"), ((button, value) -> {
+            config.DOUBLE_HOTBAR = !config.DOUBLE_HOTBAR;
+        }));
+
+        betterMountHudToggle = CyclingButtonWidget.onOffBuilder(config.BETTER_MOUNT_HUD)
+                .build(Text.translatable("config.bettermounthud"), (button, value) -> {
+            config.BETTER_MOUNT_HUD = !config.BETTER_MOUNT_HUD;
+        });
+
+        this.optionListWidget.addWidgetEntry(doubleHotbarToggle, betterMountHudToggle);
+        super.init();
     }
 
     @Override
