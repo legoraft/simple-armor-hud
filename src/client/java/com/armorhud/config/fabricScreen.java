@@ -2,7 +2,6 @@ package com.armorhud.config;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
-import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
 
@@ -42,11 +41,15 @@ public class fabricScreen extends GameOptionsScreen {
                         .build(Text.translatable("config.disablearmorbar"), ((button, value) -> config.DISABLE_ARMOR_BAR = !config.DISABLE_ARMOR_BAR));
 
         optionListWidget.addWidgetEntry(doubleHotbarToggle, betterMountHudToggle);
+        optionListWidget.addWidgetEntry(armorHudToggle, rightToLeftToggle);
+        optionListWidget.addWidgetEntry(disableArmorBar, null);
         super.init();
     }
 
     @Override
     public void close() {
+        assert this.client != null;
+
         config.save();
         this.client.setScreen(this.parent);
     }
