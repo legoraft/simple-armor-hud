@@ -8,7 +8,6 @@ import org.lwjgl.glfw.GLFW;
 public class keyBindings {
 
     public static KeyBinding armorHudToggle;
-    public static KeyBinding configTestToggle;
 
     public static void registerKeys() {
         armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(

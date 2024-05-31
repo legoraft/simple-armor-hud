@@ -7,7 +7,6 @@ import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
 
 public class fabricScreen extends GameOptionsScreen {
-
     public Screen parent;
 
     public fabricScreen(Screen parent) {
