@@ -23,7 +23,7 @@ public class fabricScreen extends GameOptionsScreen {
 
     @Override
     protected void init() {
-        OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this.height, this));
+        OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
 
         doubleHotbarToggle = CyclingButtonWidget.onOffBuilder(config.DOUBLE_HOTBAR)
                 .build(Text.translatable("config.doublehotbar"), ((button, value) -> config.DOUBLE_HOTBAR = !config.DOUBLE_HOTBAR));
@@ -44,6 +44,11 @@ public class fabricScreen extends GameOptionsScreen {
         optionListWidget.addWidgetEntry(armorHudToggle, rightToLeftToggle);
         optionListWidget.addWidgetEntry(disableArmorBar, null);
         super.init();
+    }
+
+    @Override
+    protected void addOptions() {
+
     }
 
     @Override
