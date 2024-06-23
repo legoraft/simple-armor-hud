@@ -23,8 +23,6 @@ public class fabricScreen extends GameOptionsScreen {
 
     @Override
     protected void init() {
-        OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
-
         doubleHotbarToggle = CyclingButtonWidget.onOffBuilder(config.DOUBLE_HOTBAR)
                 .build(Text.translatable("config.doublehotbar"), ((button, value) -> config.DOUBLE_HOTBAR = !config.DOUBLE_HOTBAR));
 
@@ -38,17 +36,18 @@ public class fabricScreen extends GameOptionsScreen {
                 .build(Text.translatable("config.righttoleft"), (button, value) -> config.RTL = !config.RTL);
 
         disableArmorBar = CyclingButtonWidget.onOffBuilder(config.DISABLE_ARMOR_BAR)
-                        .build(Text.translatable("config.disablearmorbar"), ((button, value) -> config.DISABLE_ARMOR_BAR = !config.DISABLE_ARMOR_BAR));
+                .build(Text.translatable("config.disablearmorbar"), ((button, value) -> config.DISABLE_ARMOR_BAR = !config.DISABLE_ARMOR_BAR));
+
+        OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
 
         optionListWidget.addWidgetEntry(doubleHotbarToggle, betterMountHudToggle);
         optionListWidget.addWidgetEntry(armorHudToggle, rightToLeftToggle);
         optionListWidget.addWidgetEntry(disableArmorBar, null);
-        super.init();
     }
 
     @Override
     protected void addOptions() {
-
+        super.init();
     }
 
     @Override
