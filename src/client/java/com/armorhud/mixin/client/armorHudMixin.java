@@ -81,7 +81,9 @@ public abstract class armorHudMixin {
 			context.getMatrices().scale(1 / g, (g + 1) / 2, 1);
 			context.getMatrices().translate(-8, -12, 0);
 		}
+
 		context.drawItem(player, stack, 0, 0, 1);
+
 		if (f > 0) {
 			context.getMatrices().pop();
 		}
