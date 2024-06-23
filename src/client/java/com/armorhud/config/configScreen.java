@@ -1,5 +1,6 @@
 package com.armorhud.config;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.*;
@@ -18,8 +19,9 @@ public class configScreen extends GameOptionsScreen {
     public CyclingButtonWidget betterMountHudToggle;
     public CyclingButtonWidget armorHudToggle;
     public CyclingButtonWidget rightToLeftToggle;
-
     public CyclingButtonWidget disableArmorBar;
+
+    public ButtonWidget doneButton;
 
     @Override
     protected void init() {
@@ -43,6 +45,19 @@ public class configScreen extends GameOptionsScreen {
         optionListWidget.addWidgetEntry(doubleHotbarToggle, betterMountHudToggle);
         optionListWidget.addWidgetEntry(armorHudToggle, rightToLeftToggle);
         optionListWidget.addWidgetEntry(disableArmorBar, null);
+
+        doneButton = ButtonWidget
+                .builder(Text.translatable("config.done"), button -> close())
+                .dimensions(width / 2 - 100, height - 25, 200, 20)
+                .build();
+
+        addDrawableChild(doneButton);
+    }
+
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(textRenderer, super.title, width / 2, 10, 0xffffff);
     }
 
     @Override
