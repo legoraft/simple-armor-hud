@@ -16,24 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public abstract class inGameHudMixin {
 
-//    @ModifyVariable(method = "renderArmor", at = @At("STORE"), ordinal = 1)
-//    private static int renderArmor(int l) {
-//
-//        if (config.DISABLE_ARMOR_BAR) {
-//            return 0;
-//        } else {
-//            return player.getArmor();
-//        }
-//    }
-
-    @Inject(method = "renderArmor", at=@At("HEAD"))
+    @Inject(method = "renderArmor", at=@At("HEAD"), cancellable = true)
     private static void checkArmor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
-        int l;
-
         if (config.DISABLE_ARMOR_BAR) {
-            l = 0;
-        } else {
-            l = player.getArmor();
+            ci.cancel();
         }
     }
 
