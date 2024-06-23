@@ -5,10 +5,10 @@ import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
 
-public class fabricScreen extends GameOptionsScreen {
+public class configScreen extends GameOptionsScreen {
     public Screen parent;
 
-    public fabricScreen(Screen parent) {
+    public configScreen(Screen parent) {
         super(parent, null, Text.translatable("config.title"));
 
         this.parent = parent;
