@@ -12,7 +12,7 @@ public abstract class tooltipMixin {
 
     @ModifyVariable(method = "renderHeldItemTooltip", at = @At("STORE"), ordinal = 2)
     public int renderHeldItemTooltip(int k, DrawContext context) {
-        return context.getScaledWindowWidth() - 62;
+        return context.getScaledWindowHeight() - 62;
     }
 
 }
