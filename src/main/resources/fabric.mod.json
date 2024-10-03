@@ -32,5 +32,8 @@
 		"fabricloader": ">=0.14.19",
 		"minecraft": ">=1.19",
 		"java": ">=17"
-	}
+	},
+    "suggests": {
+        "trinkets": ">=3.7.1"
+    }
 }

@@ -1,20 +1,34 @@
 package com.armorhud;
 
+import com.armorhud.armor.ArmorAccessor;
+import com.armorhud.armor.TrinketsArmorAccessor;
+import com.armorhud.armor.VanillaArmorAccessor;
 import com.armorhud.config.config;
 import com.armorhud.util.armorHudRegistries;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.loader.api.FabricLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class armorHud implements ClientModInitializer {
 
+    public static final Logger LOGGER = LoggerFactory.getLogger("simple-armor-hud");
     public static final config CONFIG = new config();
+    private static ArmorAccessor armorAccessor;
 
     @Override
     public void onInitializeClient() {
-        System.out.println("Simple Armor Hud loaded!");
+        LOGGER.info("Simple Armor Hud loaded!");
         CONFIG.load();
         armorHudRegistries.registerArmorHud();
         handleKeys();
+
+        armorAccessor = new VanillaArmorAccessor();
+        if (FabricLoader.getInstance().isModLoaded("trinkets")) {
+            armorAccessor = new TrinketsArmorAccessor(armorAccessor);
+        }
+        LOGGER.info("Armor accessor implementation: {}", armorAccessor.getClass().getSimpleName());
     }
 
     public void handleKeys() {
@@ -23,5 +37,9 @@ public class armorHud implements ClientModInitializer {
                 config.ARMOR_HUD = !config.ARMOR_HUD;
             }
         });
+    }
+
+    public static ArmorAccessor getArmorAccessor() {
+        return armorAccessor;
     }
 }
