@@ -20,14 +20,11 @@ public class armorHud implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("Simple Armor Hud loaded!");
+        armorAccessor = new VanillaArmorAccessor();
         CONFIG.load();
         armorHudRegistries.registerArmorHud();
         handleKeys();
 
-        armorAccessor = new VanillaArmorAccessor();
-        if (FabricLoader.getInstance().isModLoaded("trinkets")) {
-            armorAccessor = new TrinketsArmorAccessor(armorAccessor);
-        }
         LOGGER.info("Armor accessor implementation: {}", armorAccessor.getClass().getSimpleName());
     }
 
@@ -37,6 +34,10 @@ public class armorHud implements ClientModInitializer {
                 config.ARMOR_HUD = !config.ARMOR_HUD;
             }
         });
+    }
+
+    public static void setArmorAccessor(ArmorAccessor armorAccessor) {
+        armorHud.armorAccessor = armorAccessor;
     }
 
     public static ArmorAccessor getArmorAccessor() {
