@@ -1,5 +1,7 @@
 package com.armorhud.mixin.client;
 
+import com.armorhud.armor.ArmorAccessor;
+import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -26,12 +28,18 @@ public abstract class armorHudMixin {
 	@Shadow public abstract void tick(boolean paused);
 
 	@Unique int armorHeight;
+	@Unique boolean initialized;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
 		if(!config.ARMOR_HUD) { return; }
 
 		assert client.player != null;
+
+        if (!initialized) {
+            armorHud.getArmorAccessor().initialize(client.player);
+            initialized = true;
+        }
 
 		renderArmor(context, tickCounter);
 		moveArmor(context);
@@ -43,24 +51,27 @@ public abstract class armorHudMixin {
 
 		assert client.player != null;
 
+        ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
+        int pieces = armorAccessor.getPieces(client.player);
+
 		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
 		final int armorWidth = 15;
-		final int barWidth = armorWidth * 4;
+		final int barWidth = armorWidth * pieces;
 		float hungerX = scaledWidth / 2f + 91;
 		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
 		x += 2; // This makes it look better because the helmet is thinner.
 
-		for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < pieces; j++) {
 			x -= armorWidth;
 			int armorPiece;
 
 			if (config.RTL) {
-				armorPiece = 3 - j;
+				armorPiece = (pieces - 1) - j;
 			} else {
 				armorPiece = j;
 			}
 
-			renderArmorPiece(context, x, armorHeight, tickCounter, client.player, client.player.getInventory().getArmorStack(armorPiece));
+			renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, armorPiece));
 		}
 	}
 
