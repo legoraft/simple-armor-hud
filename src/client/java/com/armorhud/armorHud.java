@@ -1,13 +1,11 @@
 package com.armorhud;
 
 import com.armorhud.armor.ArmorAccessor;
-import com.armorhud.armor.TrinketsArmorAccessor;
 import com.armorhud.armor.VanillaArmorAccessor;
 import com.armorhud.config.config;
 import com.armorhud.util.armorHudRegistries;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

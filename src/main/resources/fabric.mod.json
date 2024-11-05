@@ -14,7 +14,7 @@
 	},
 	"license": "LGPL-2.1",
 	"icon": "assets/simple-armor-hud/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"com.armorhud.armorHud"

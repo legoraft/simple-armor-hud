@@ -85,7 +85,7 @@ public abstract class armorHudMixin {
 
 		context.drawItem(player, stack, 0, 0, 1);
 
-		context.drawItemInSlot(this.client.textRenderer, stack, 0,0);
+		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
 		context.getMatrices().pop();
 	}
 
