@@ -59,7 +59,7 @@ public abstract class armorHudMixin {
 		final int barWidth = armorWidth * pieces;
 //		Added check for Above_Health_Bar -Dino
 		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
-						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 200 ? -10 : 91);
+						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
 		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
 		x += 2; // This makes it look better because the helmet is thinner.
 
@@ -103,7 +103,7 @@ public abstract class armorHudMixin {
 /*  	TODO: fix visual bug where remaining hearts available (>20hp) get removed later than armor hud -Dino
 		Skips unnecessary checks when Above_Health_Bar is on, not a fan of the extra if statement, but it works -Dino
 		Note: setting gets turned off above 9 rows of hearts, since the hud will fly off the screen at some point -Dino			*/
-		if (config.ABOVE_HEALTH_BAR && client.player.getMaxHealth() + client.player.getMaxAbsorption() < 200) {
+		if (config.ABOVE_HEALTH_BAR && client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180) {
 /* 			Displacement calculation extracted for clarity. -Dino
  			Calc breaks above 90 hearts since hearts don't get condensed further, so it overshoots down -Dino			*/
 			int playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
