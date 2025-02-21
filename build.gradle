@@ -56,7 +56,8 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
-    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+//	  commented for ide testing
+//    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 }
 
 processResources {

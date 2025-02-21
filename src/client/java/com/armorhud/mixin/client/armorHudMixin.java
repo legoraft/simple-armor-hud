@@ -28,7 +28,6 @@ public abstract class armorHudMixin {
 	@Shadow public abstract void tick(boolean paused);
 
 	@Unique int armorHeight;
-	@Unique int playerHealthRows;
 	@Unique boolean initialized;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
@@ -41,10 +40,6 @@ public abstract class armorHudMixin {
             armorHud.getArmorAccessor().initialize(client.player);
             initialized = true;
         }
-
-/*		Calculates how many rows of hearts there are, used as height multiplier -Dino
-		Possibly shouldn't use it as a global var here, but it makes health checks "simpler" -Dino			*/
-		playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
 
 		renderArmor(context, tickCounter);
 		moveArmor(context);
@@ -62,8 +57,9 @@ public abstract class armorHudMixin {
 		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
 		final int armorWidth = 15;
 		final int barWidth = armorWidth * pieces;
-//		Added check for Left_Side_Render -Dino
-		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR && playerHealthRows < 10 ? -10 : 91);
+//		Added check for Above_Health_Bar -Dino
+		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
+						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 200 ? -10 : 91);
 		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
 		x += 2; // This makes it look better because the helmet is thinner.
 
@@ -105,11 +101,12 @@ public abstract class armorHudMixin {
 		armorHeight = scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
 
 /*  	TODO: fix visual bug where remaining hearts available (>20hp) get removed later than armor hud -Dino
-		Skips unnecessary checks when Left_Side_Render is on, not a fan of the extra if statement, but it works -Dino
+		Skips unnecessary checks when Above_Health_Bar is on, not a fan of the extra if statement, but it works -Dino
 		Note: setting gets turned off above 9 rows of hearts, since the hud will fly off the screen at some point -Dino			*/
-		if (config.ABOVE_HEALTH_BAR && playerHealthRows < 10) {
+		if (config.ABOVE_HEALTH_BAR && client.player.getMaxHealth() + client.player.getMaxAbsorption() < 200) {
 /* 			Displacement calculation extracted for clarity. -Dino
  			Calc breaks above 90 hearts since hearts don't get condensed further, so it overshoots down -Dino			*/
+			int playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
 			int healthDisplacement = (10 * playerHealthRows) - ((playerHealthRows>2) ? (playerHealthRows -2) * (playerHealthRows -1) : 0);
 
 //			Moves armorhud up depending on how much health you have, along with negative displacement from higher heart counts -Dino
@@ -129,8 +126,8 @@ public abstract class armorHudMixin {
 				armorHeight -= 10;
 			}
 
-//		Moves armorhud down if player is in creative
-		armorHeight += (client.player.isCreative() ? 16 : 0);
+//			Moves armorhud down if player is in creative
+			armorHeight += (client.player.isCreative() ? 16 : 0);
 
 //			Moves armorhud up if player is on mount, like horse
 			if (client.player.hasVehicle() && getRiddenEntity() != null) {
