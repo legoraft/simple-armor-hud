@@ -26,7 +26,6 @@ public class config {
         properties.setProperty("right_to_left", Boolean.toString(RTL));
         properties.setProperty("disable_armor_bar", Boolean.toString(DISABLE_ARMOR_BAR));
         properties.setProperty("above_health_bar", Boolean.toString(ABOVE_HEALTH_BAR));
-
     }
 
     public void read(Properties properties) {

@@ -1,6 +1,6 @@
 package com.armorhud.util;
 
-//import com.armorhud.armor.TrinketsArmorAccessor;
+import com.armorhud.armor.TrinketsArmorAccessor;
 import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import net.fabricmc.loader.api.FabricLoader;
@@ -17,7 +17,7 @@ public class modDetect {
             armorHud.LOGGER.info("Double hotbar found!");
         }
         if (FabricLoader.getInstance().isModLoaded("trinkets")) {
-//            armorHud.setArmorAccessor(new TrinketsArmorAccessor(armorHud.getArmorAccessor()));
+            armorHud.setArmorAccessor(new TrinketsArmorAccessor(armorHud.getArmorAccessor()));
             armorHud.LOGGER.info("Trinkets found!");
         }
 
