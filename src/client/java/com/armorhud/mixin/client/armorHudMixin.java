@@ -57,7 +57,9 @@ public abstract class armorHudMixin {
 		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
 		final int armorWidth = 15;
 		final int barWidth = armorWidth * pieces;
-		float hungerX = scaledWidth / 2f + 91;
+//		Added check for Above_Health_Bar -Dino
+		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
+						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
 		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
 		x += 2; // This makes it look better because the helmet is thinner.
 
@@ -98,17 +100,39 @@ public abstract class armorHudMixin {
 //		Moves armorhud up if player uses double hotbar
 		armorHeight = scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
 
-//		Moves armorhud up if player is underwater
-		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative()) {
-			armorHeight -= 10;
-		}
+/*  	TODO: fix visual bug where remaining hearts available (>20hp) get removed later than armor hud -Dino
+		Skips unnecessary checks when Above_Health_Bar is on, not a fan of the extra if statement, but it works -Dino
+		Note: setting gets turned off above 9 rows of hearts, since the hud will fly off the screen at some point -Dino			*/
+		if (config.ABOVE_HEALTH_BAR && client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180) {
+/* 			Displacement calculation extracted for clarity. -Dino
+ 			Calc breaks above 90 hearts since hearts don't get condensed further, so it overshoots down -Dino			*/
+			int playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
+			int healthDisplacement = (10 * playerHealthRows) - ((playerHealthRows>2) ? (playerHealthRows -2) * (playerHealthRows -1) : 0);
 
-//		Moves armorhud down if player is in creative
-		armorHeight += (client.player.isCreative() ? 16 : 0);
+//			Moves armorhud up depending on how much health you have, along with negative displacement from higher heart counts -Dino
+			armorHeight -= healthDisplacement;
 
-//		Moves armorhud up if player is on mount, like horse
-		if (client.player.hasVehicle() && getRiddenEntity() != null) {
-			moveArmorHorse();
+/*			Moves armorhud down if player is in creative or Disable_Armor_Bar is on,
+			formatted as an if-statement for readability -Dino
+ */
+			if(client.player.isCreative()) {
+				armorHeight += 16 + healthDisplacement;
+			} else if (config.DISABLE_ARMOR_BAR) {
+				armorHeight += 10;
+			}
+		} else {
+//			Moves armorhud up if player is underwater
+			if ((client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative())) {
+				armorHeight -= 10;
+			}
+
+//			Moves armorhud down if player is in creative
+			armorHeight += (client.player.isCreative() ? 16 : 0);
+
+//			Moves armorhud up if player is on mount, like horse
+			if (client.player.hasVehicle() && getRiddenEntity() != null) {
+				moveArmorHorse();
+			}
 		}
 	}
 

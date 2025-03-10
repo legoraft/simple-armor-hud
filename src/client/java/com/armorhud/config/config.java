@@ -15,6 +15,7 @@ public class config {
     public static boolean ARMOR_HUD = true;
     public static boolean RTL = false;
     public static boolean DISABLE_ARMOR_BAR = false;
+    public static boolean ABOVE_HEALTH_BAR = false; // a new option to render armor hud above the healthbar instead of the hungerbar -Dino
 
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
@@ -24,6 +25,7 @@ public class config {
         properties.setProperty("armor_hud", Boolean.toString(ARMOR_HUD));
         properties.setProperty("right_to_left", Boolean.toString(RTL));
         properties.setProperty("disable_armor_bar", Boolean.toString(DISABLE_ARMOR_BAR));
+        properties.setProperty("above_health_bar", Boolean.toString(ABOVE_HEALTH_BAR));
     }
 
     public void read(Properties properties) {
@@ -32,6 +34,7 @@ public class config {
         ARMOR_HUD = Boolean.parseBoolean(properties.getProperty("armor_hud"));
         RTL = Boolean.parseBoolean(properties.getProperty("right_to_left"));
         DISABLE_ARMOR_BAR = Boolean.parseBoolean(properties.getProperty("disable_armor_bar"));
+        ABOVE_HEALTH_BAR = Boolean.parseBoolean(properties.getProperty("above_health_bar"));
     }
 
     public static void save() {
