@@ -10,7 +10,6 @@ import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,9 +26,6 @@ public abstract class armorHudMixin {
 
 	@Shadow protected abstract LivingEntity getRiddenEntity();
 
-	@Shadow public abstract void tick(boolean paused);
-
-	@Shadow private ItemStack currentStack;
 	@Unique int armorHeight;
 	@Unique boolean initialized;
 
@@ -44,19 +40,17 @@ public abstract class armorHudMixin {
             initialized = true;
         }
 
-		renderArmor(context, tickCounter);
+		renderArmor(context);
 		moveArmor(context);
 	}
 
 	@Unique
-	private void renderArmor(DrawContext context, RenderTickCounter tickCounter) {
+	private void renderArmor(DrawContext context) {
 		int scaledWidth = context.getScaledWindowWidth();
 
 		assert client.player != null;
 
         ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
-        int pieces = armorAccessor.getPieces(client.player);
-//		System.out.println(pieces);
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
@@ -71,14 +65,14 @@ public abstract class armorHudMixin {
 			x -= armorWidth;
 
 			if (slot.isArmorSlot()) {
-				renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, slot));
+				renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
 			}
 		}
 	}
 
 	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
 	@Unique
-	private void renderArmorPiece(DrawContext context, float x, float y, RenderTickCounter tickCounter, PlayerEntity player, ItemStack stack) {
+	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
 		if (stack.isEmpty()) return;
 
 		context.getMatrices().push();
