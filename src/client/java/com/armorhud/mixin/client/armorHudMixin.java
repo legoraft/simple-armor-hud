@@ -56,17 +56,20 @@ public abstract class armorHudMixin {
 
         ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
         int pieces = armorAccessor.getPieces(client.player);
+//		System.out.println(pieces);
 
-		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
+		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
-		final int barWidth = armorWidth * pieces;
+
 //		Added check for Above_Health_Bar -Dino
 		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
-						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
-		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
+				&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
+		float x = hungerX + hungerWidth;
 		x += 2; // This makes it look better because the helmet is thinner.
 
         for (EquipmentSlot slot : EquipmentSlot.values()) {
+			x -= armorWidth;
+
 			if (slot.isArmorSlot()) {
 				renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, slot));
 			}
@@ -146,6 +149,7 @@ public abstract class armorHudMixin {
 					armorHeight -= (client.player.isCreative() ? 26 : 10);
 				}
 			}
+
 //		Armor hud only has to be moved up if better mount hud is enabled or player is in creative
 			else {
 				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
