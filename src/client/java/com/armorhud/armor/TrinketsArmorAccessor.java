@@ -1,3 +1,4 @@
+/*
 package com.armorhud.armor;
 
 import dev.emi.trinkets.api.SlotReference;
@@ -88,3 +89,5 @@ public class TrinketsArmorAccessor implements ArmorAccessor {
     private interface SlotFunction extends Function<ClientPlayerEntity, ItemStack> {
     }
 }
+
+*/
