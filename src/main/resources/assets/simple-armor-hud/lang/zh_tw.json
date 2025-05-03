@@ -1,0 +1,13 @@
+{
+  "key.armorhud.armorvisible": "開啟/關閉盔甲抬頭顯示器",
+  "category.armorhud.toggles": "簡易盔甲抬頭顯示器",
+  
+  "config.doublehotbar": "雙快捷欄",
+  "config.bettermounthud": "更佳坐騎抬頭顯示器",
+  "config.armorvisible": "顯示盔甲",
+  "config.righttoleft": "從右至左顯示",
+  "config.disablearmorbar": "停用盔甲條",
+  
+  "config.title": "Armor hud《盔甲抬頭顯示器》設定畫面",
+  "config.done": "完成"
+  }

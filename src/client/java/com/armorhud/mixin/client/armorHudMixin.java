@@ -1,5 +1,7 @@
 package com.armorhud.mixin.client;
 
+import com.armorhud.armor.ArmorAccessor;
+import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -26,12 +28,18 @@ public abstract class armorHudMixin {
 	@Shadow public abstract void tick(boolean paused);
 
 	@Unique int armorHeight;
+	@Unique boolean initialized;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
 		if(!config.ARMOR_HUD) { return; }
 
 		assert client.player != null;
+
+        if (!initialized) {
+            armorHud.getArmorAccessor().initialize(client.player);
+            initialized = true;
+        }
 
 		renderArmor(context, tickCounter);
 		moveArmor(context);
@@ -43,24 +51,29 @@ public abstract class armorHudMixin {
 
 		assert client.player != null;
 
+        ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
+        int pieces = armorAccessor.getPieces(client.player);
+
 		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
 		final int armorWidth = 15;
-		final int barWidth = armorWidth * 4;
-		float hungerX = scaledWidth / 2f + 91;
+		final int barWidth = armorWidth * pieces;
+//		Added check for Above_Health_Bar -Dino
+		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
+						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
 		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
 		x += 2; // This makes it look better because the helmet is thinner.
 
-		for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < pieces; j++) {
 			x -= armorWidth;
 			int armorPiece;
 
 			if (config.RTL) {
-				armorPiece = 3 - j;
+				armorPiece = (pieces - 1) - j;
 			} else {
 				armorPiece = j;
 			}
 
-			renderArmorPiece(context, x, armorHeight, tickCounter, client.player, client.player.getInventory().getArmorStack(armorPiece));
+			renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, armorPiece));
 		}
 	}
 
@@ -74,7 +87,7 @@ public abstract class armorHudMixin {
 
 		context.drawItem(player, stack, 0, 0, 1);
 
-		context.drawItemInSlot(this.client.textRenderer, stack, 0,0);
+		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
 		context.getMatrices().pop();
 	}
 
@@ -87,17 +100,39 @@ public abstract class armorHudMixin {
 //		Moves armorhud up if player uses double hotbar
 		armorHeight = scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
 
-//		Moves armorhud up if player is underwater
-		if (client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative()) {
-			armorHeight -= 10;
-		}
+/*  	TODO: fix visual bug where remaining hearts available (>20hp) get removed later than armor hud -Dino
+		Skips unnecessary checks when Above_Health_Bar is on, not a fan of the extra if statement, but it works -Dino
+		Note: setting gets turned off above 9 rows of hearts, since the hud will fly off the screen at some point -Dino			*/
+		if (config.ABOVE_HEALTH_BAR && client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180) {
+/* 			Displacement calculation extracted for clarity. -Dino
+ 			Calc breaks above 90 hearts since hearts don't get condensed further, so it overshoots down -Dino			*/
+			int playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
+			int healthDisplacement = (10 * playerHealthRows) - ((playerHealthRows>2) ? (playerHealthRows -2) * (playerHealthRows -1) : 0);
 
-//		Moves armorhud down if player is in creative
-		armorHeight += (client.player.isCreative() ? 16 : 0);
+//			Moves armorhud up depending on how much health you have, along with negative displacement from higher heart counts -Dino
+			armorHeight -= healthDisplacement;
 
-//		Moves armorhud up if player is on mount, like horse
-		if (client.player.hasVehicle() && getRiddenEntity() != null) {
-			moveArmorHorse();
+/*			Moves armorhud down if player is in creative or Disable_Armor_Bar is on,
+			formatted as an if-statement for readability -Dino
+ */
+			if(client.player.isCreative()) {
+				armorHeight += 16 + healthDisplacement;
+			} else if (config.DISABLE_ARMOR_BAR) {
+				armorHeight += 10;
+			}
+		} else {
+//			Moves armorhud up if player is underwater
+			if ((client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative())) {
+				armorHeight -= 10;
+			}
+
+//			Moves armorhud down if player is in creative
+			armorHeight += (client.player.isCreative() ? 16 : 0);
+
+//			Moves armorhud up if player is on mount, like horse
+			if (client.player.hasVehicle() && getRiddenEntity() != null) {
+				moveArmorHorse();
+			}
 		}
 	}
 

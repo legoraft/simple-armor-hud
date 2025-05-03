@@ -20,6 +20,7 @@ public class configScreen extends GameOptionsScreen {
     public CyclingButtonWidget armorHudToggle;
     public CyclingButtonWidget rightToLeftToggle;
     public CyclingButtonWidget disableArmorBar;
+    public CyclingButtonWidget aboveHealthBar; // TODO: want the option to visually be "Render: above health bar" & "Render: above hunger bar" instead of "off" & "on" -Dino
 
     public ButtonWidget doneButton;
 
@@ -40,11 +41,14 @@ public class configScreen extends GameOptionsScreen {
         disableArmorBar = CyclingButtonWidget.onOffBuilder(config.DISABLE_ARMOR_BAR)
                 .build(Text.translatable("config.disablearmorbar"), ((button, value) -> config.DISABLE_ARMOR_BAR = !config.DISABLE_ARMOR_BAR));
 
+        aboveHealthBar = CyclingButtonWidget.onOffBuilder(config.ABOVE_HEALTH_BAR)
+                .build(Text.translatable("config.abovehealthbar"), ((button, value) -> config.ABOVE_HEALTH_BAR = !config.ABOVE_HEALTH_BAR));
+
         OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
 
         optionListWidget.addWidgetEntry(doubleHotbarToggle, betterMountHudToggle);
         optionListWidget.addWidgetEntry(armorHudToggle, rightToLeftToggle);
-        optionListWidget.addWidgetEntry(disableArmorBar, null);
+        optionListWidget.addWidgetEntry(disableArmorBar, aboveHealthBar);
 
         doneButton = ButtonWidget
                 .builder(Text.translatable("config.done"), button -> close())

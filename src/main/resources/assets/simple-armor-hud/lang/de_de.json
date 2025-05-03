@@ -1,0 +1,12 @@
+{
+  "key.armorhud.armorvisible": "Schalte Rüstungs-HUD an/aus",
+  "category.armorhud.toggles": "Simple armor hud",
+
+  "config.doublehotbar": "Double Hotbar",
+  "config.bettermounthud": "Better Mount Hud",
+  "config.armorvisible": "Rüstungs-HUD sichtbar",
+  "config.disablearmorbar": "Rüstungsbalken ausschalten",
+
+  "config.righttoleft": "Rechts nach links Anzeige",
+  "config.done": "Fertig"
+}
