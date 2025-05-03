@@ -7,8 +7,10 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +29,7 @@ public abstract class armorHudMixin {
 
 	@Shadow public abstract void tick(boolean paused);
 
+	@Shadow private ItemStack currentStack;
 	@Unique int armorHeight;
 	@Unique boolean initialized;
 
@@ -63,17 +66,10 @@ public abstract class armorHudMixin {
 		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
 		x += 2; // This makes it look better because the helmet is thinner.
 
-        for (int j = 0; j < pieces; j++) {
-			x -= armorWidth;
-			int armorPiece;
-
-			if (config.RTL) {
-				armorPiece = (pieces - 1) - j;
-			} else {
-				armorPiece = j;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+			if (slot.isArmorSlot()) {
+				renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, slot));
 			}
-
-			renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, armorPiece));
 		}
 	}
 
