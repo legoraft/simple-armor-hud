@@ -10,6 +10,4 @@ public interface ArmorAccessor {
     }
 
     ItemStack getArmorPiece(ClientPlayerEntity player, EquipmentSlot slot);
-
-    int getPieces(ClientPlayerEntity player);
 }

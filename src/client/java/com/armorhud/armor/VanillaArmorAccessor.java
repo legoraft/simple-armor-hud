@@ -13,18 +13,4 @@ public class VanillaArmorAccessor implements ArmorAccessor {
 
         return player.getEquippedStack(slot);
     }
-
-    public int getPieces(ClientPlayerEntity player) {
-        int armorCount = 0;
-
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
-            if (slot.isArmorSlot()) {
-                if (!player.getEquippedStack(slot).isEmpty()) {
-                    armorCount++;
-                }
-            }
-        }
-
-        return armorCount;
-    }
 }
