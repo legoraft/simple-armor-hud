@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -25,8 +26,6 @@ public abstract class armorHudMixin {
 
 	@Shadow protected abstract LivingEntity getRiddenEntity();
 
-	@Shadow public abstract void tick(boolean paused);
-
 	@Unique int armorHeight;
 	@Unique boolean initialized;
 
@@ -41,45 +40,39 @@ public abstract class armorHudMixin {
             initialized = true;
         }
 
-		renderArmor(context, tickCounter);
+		renderArmor(context);
 		moveArmor(context);
 	}
 
 	@Unique
-	private void renderArmor(DrawContext context, RenderTickCounter tickCounter) {
+	private void renderArmor(DrawContext context) {
 		int scaledWidth = context.getScaledWindowWidth();
 
 		assert client.player != null;
 
         ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
-        int pieces = armorAccessor.getPieces(client.player);
 
-		final int hungerWidth = 80 + 8; // Bar advances 8 pixels to the left 10 times, 8 is added for the width of the last sprite.
+		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
-		final int barWidth = armorWidth * pieces;
+
 //		Added check for Above_Health_Bar -Dino
 		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
-						&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
-		float x = hungerX - hungerWidth / 2f + barWidth / 2f;
+				&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
+		float x = hungerX + hungerWidth;
 		x += 2; // This makes it look better because the helmet is thinner.
 
-        for (int j = 0; j < pieces; j++) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
 			x -= armorWidth;
-			int armorPiece;
 
-			if (config.RTL) {
-				armorPiece = (pieces - 1) - j;
-			} else {
-				armorPiece = j;
+			if (slot.isArmorSlot()) {
+				renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
 			}
-
-			renderArmorPiece(context, x, armorHeight, tickCounter, client.player, armorAccessor.getArmorPiece(client.player, armorPiece));
 		}
 	}
 
 	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
 	@Unique
-	private void renderArmorPiece(DrawContext context, float x, float y, RenderTickCounter tickCounter, PlayerEntity player, ItemStack stack) {
+	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
 		if (stack.isEmpty()) return;
 
 		context.getMatrices().push();
@@ -150,6 +143,7 @@ public abstract class armorHudMixin {
 					armorHeight -= (client.player.isCreative() ? 26 : 10);
 				}
 			}
+
 //		Armor hud only has to be moved up if better mount hud is enabled or player is in creative
 			else {
 				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {

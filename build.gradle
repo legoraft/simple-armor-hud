@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
 	
 }
@@ -56,7 +56,7 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
-    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    // modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 }
 
 processResources {

@@ -34,10 +34,6 @@ public class armorHud implements ClientModInitializer {
         });
     }
 
-    public static void setArmorAccessor(ArmorAccessor armorAccessor) {
-        armorHud.armorAccessor = armorAccessor;
-    }
-
     public static ArmorAccessor getArmorAccessor() {
         return armorAccessor;
     }
