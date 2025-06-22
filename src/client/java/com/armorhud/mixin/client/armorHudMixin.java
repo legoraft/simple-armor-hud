@@ -75,13 +75,13 @@ public abstract class armorHudMixin {
 	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
 		if (stack.isEmpty()) return;
 
-		context.getMatrices().push();
-		context.getMatrices().translate(x, y, 0);
+		context.getMatrices().pushMatrix();
+		context.getMatrices().translate(x, y);
 
 		context.drawItem(player, stack, 0, 0, 1);
 
 		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
-		context.getMatrices().pop();
+		context.getMatrices().popMatrix();
 	}
 
 	@Unique
