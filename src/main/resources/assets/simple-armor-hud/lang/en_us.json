@@ -1,6 +1,6 @@
 {
   "key.armorhud.armorvisible": "Toggle armor hud on/off",
-  "category.armorhud.toggles": "Simple armor hud",
+  "key.category.simple-armor-hud.armorhud.toggles": "Simple armor hud",
 
   "config.doublehotbar": "Double Hotbar",
   "config.bettermounthud": "Better Mount Hud",
