@@ -7,15 +7,15 @@ import net.minecraft.util.Identifier;
 
 public class keyBindings {
 
-	public static KeyBinding armorHudToggle;
+    public static KeyBinding armorHudToggle;
 
-	public static void registerKeys() {
-		final KeyBinding.Category category = KeyBinding.Category.create(Identifier.of("simple-armor-hud", "armorhud.toggles"));
-		armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"key.armorhud.armorvisible",
-				InputUtil.UNKNOWN_KEY.getCode(),
-				category
-		));
-	}
+    public static void registerKeys() {
+        final KeyBinding.Category category = KeyBinding.Category.create(Identifier.of("simple-armor-hud", "armorhud.toggles"));
+        armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.armorhud.armorvisible",
+            InputUtil.UNKNOWN_KEY.getCode(),
+            category
+        ));
+    }
 
 }
