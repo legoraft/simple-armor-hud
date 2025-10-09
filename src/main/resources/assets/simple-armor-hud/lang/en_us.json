@@ -7,7 +7,9 @@
   "config.armorvisible": "Armor visible",
   "config.righttoleft": "Right to left display",
   "config.disablearmorbar": "Disable armor bar",
-  "config.abovehealthbar": "Move above health bar",
+  "config.hudposition": "Render",
+  "simple_armor_hud.render.above_food_bar": "Above Food Bar",
+  "simple_armor_hud.render.above_armor_bar": "Above Armor Bar",
 
   "config.title": "Armor hud config screen",
   "config.done": "Done"

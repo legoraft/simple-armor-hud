@@ -58,10 +58,12 @@ public abstract class armorHudMixin {
 //		Added check for Above_Health_Bar -Dino
 		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
 				&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
-		float x = hungerX + hungerWidth;
-		x += 2; // This makes it look better because the helmet is thinner.
+		float x = hungerX + hungerWidth + 2;
 
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
+		EquipmentSlot[] slots = EquipmentSlot.values();
+		boolean rtl = config.RTL;
+		for (int i = rtl ? slots.length-1 : 0; rtl ? i >= 0 : i < slots.length; i += rtl ? -1 : 1) {
+			EquipmentSlot slot = slots[i];
 			x -= armorWidth;
 
 			if (slot.isArmorSlot()) {

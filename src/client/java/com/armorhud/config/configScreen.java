@@ -15,12 +15,12 @@ public class configScreen extends GameOptionsScreen {
         this.parent = parent;
     }
 
-    public CyclingButtonWidget doubleHotbarToggle;
-    public CyclingButtonWidget betterMountHudToggle;
-    public CyclingButtonWidget armorHudToggle;
-    public CyclingButtonWidget rightToLeftToggle;
-    public CyclingButtonWidget disableArmorBar;
-    public CyclingButtonWidget aboveHealthBar; // TODO: want the option to visually be "Render: above health bar" & "Render: above hunger bar" instead of "off" & "on" -Dino
+    public CyclingButtonWidget<?> doubleHotbarToggle;
+    public CyclingButtonWidget<?> betterMountHudToggle;
+    public CyclingButtonWidget<?> armorHudToggle;
+    public CyclingButtonWidget<?> rightToLeftToggle;
+    public CyclingButtonWidget<?> disableArmorBar;
+    public CyclingButtonWidget<?> armorPosition;
 
     public ButtonWidget doneButton;
 
@@ -41,14 +41,15 @@ public class configScreen extends GameOptionsScreen {
         disableArmorBar = CyclingButtonWidget.onOffBuilder(config.DISABLE_ARMOR_BAR)
                 .build(Text.translatable("config.disablearmorbar"), ((button, value) -> config.DISABLE_ARMOR_BAR = !config.DISABLE_ARMOR_BAR));
 
-        aboveHealthBar = CyclingButtonWidget.onOffBuilder(config.ABOVE_HEALTH_BAR)
-                .build(Text.translatable("config.abovehealthbar"), ((button, value) -> config.ABOVE_HEALTH_BAR = !config.ABOVE_HEALTH_BAR));
+        armorPosition = CyclingButtonWidget.onOffBuilder(Text.translatable("simple_armor_hud.render.above_food_bar"),
+						Text.translatable("simple_armor_hud.render.above_armor_bar")).initially(config.ABOVE_HEALTH_BAR)
+                .build(Text.translatable("config.hudposition"), ((button, value) -> config.ABOVE_HEALTH_BAR = !config.ABOVE_HEALTH_BAR));
 
         OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
 
         optionListWidget.addWidgetEntry(doubleHotbarToggle, betterMountHudToggle);
         optionListWidget.addWidgetEntry(armorHudToggle, rightToLeftToggle);
-        optionListWidget.addWidgetEntry(disableArmorBar, aboveHealthBar);
+        optionListWidget.addWidgetEntry(disableArmorBar, armorPosition);
 
         doneButton = ButtonWidget
                 .builder(Text.translatable("config.done"), button -> close())
