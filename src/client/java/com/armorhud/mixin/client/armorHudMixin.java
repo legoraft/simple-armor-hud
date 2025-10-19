@@ -52,7 +52,7 @@ public abstract class armorHudMixin {
 		boolean rtl = config.RTL;
         ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
 
-		final int hungerWidth = rtl ? 7 : 22; // Magic number to center 4 armor pieces
+		final int hungerWidth = config.TRIM_EMPTY_SLOTS ? (rtl ? 7 : 22) : 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
 //		Added check for Above_Health_Bar -Dino
@@ -61,17 +61,19 @@ public abstract class armorHudMixin {
 		EquipmentSlot[] slots = EquipmentSlot.values();
 		// counts empty slots to center condensed armor bar
 		int emptyArmorSlots = 0;
+		if (config.TRIM_EMPTY_SLOTS) {
 			for (EquipmentSlot slot : slots) {
 				if(slot.isArmorSlot() && client.player.getEquippedStack(slot).isEmpty()) {
 					emptyArmorSlots++;
 				}
 			}
+		}
 		float x = hungerX + hungerWidth - (7*emptyArmorSlots) + 2;
 
 
 		for (int i = rtl ? slots.length-1 : 0; rtl ? i >= 0 : i < slots.length; i += rtl ? -1 : 1) {
 			EquipmentSlot slot = slots[i];
-			if(slot.isArmorSlot() && client.player.getEquippedStack(slot).isEmpty()) {
+			if(config.TRIM_EMPTY_SLOTS && slot.isArmorSlot() && client.player.getEquippedStack(slot).isEmpty()) {
 				continue;
 			};
 			x -= armorWidth;
