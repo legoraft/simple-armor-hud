@@ -46,7 +46,7 @@ public class configScreen extends GameOptionsScreen {
 						Text.translatable("simple_armor_hud.render.above_armor_bar")).initially(config.ABOVE_HEALTH_BAR)
                 .build(Text.translatable("config.hudposition"), ((button, value) -> config.ABOVE_HEALTH_BAR = !config.ABOVE_HEALTH_BAR));
 
-        disableArmorBar = CyclingButtonWidget.onOffBuilder(config.TRIM_EMPTY_SLOTS)
+        trimEmptySlots = CyclingButtonWidget.onOffBuilder(config.TRIM_EMPTY_SLOTS)
                 .build(Text.translatable("config.trimemptyslots"), ((button, value) -> config.TRIM_EMPTY_SLOTS = !config.TRIM_EMPTY_SLOTS));
 
         OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));

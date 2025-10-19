@@ -11,6 +11,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -52,18 +54,18 @@ public abstract class armorHudMixin {
 		boolean rtl = config.RTL;
         ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
 
-		final int hungerWidth = config.TRIM_EMPTY_SLOTS ? (rtl ? 7 : 22) : 14; // Magic number to center 4 armor pieces
+		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
 //		Added check for Above_Health_Bar -Dino
 		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
 				&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
 		EquipmentSlot[] slots = EquipmentSlot.values();
-		// counts empty slots to center condensed armor bar
+		// counts empty slots to center condensed armor bar, don't like having to loop through the equip slots twice but idk how else to center this dynamically -dino
 		int emptyArmorSlots = 0;
 		if (config.TRIM_EMPTY_SLOTS) {
-			for (EquipmentSlot slot : slots) {
-				if(slot.isArmorSlot() && client.player.getEquippedStack(slot).isEmpty()) {
+			for (int i = 2; i<6; i++) { // checks players armor slots only. probably makes stuff like trinkets incompatible -dino
+				if(client.player.getEquippedStack(slots[i]).isEmpty()) {
 					emptyArmorSlots++;
 				}
 			}
@@ -73,7 +75,7 @@ public abstract class armorHudMixin {
 
 		for (int i = rtl ? slots.length-1 : 0; rtl ? i >= 0 : i < slots.length; i += rtl ? -1 : 1) {
 			EquipmentSlot slot = slots[i];
-			if(config.TRIM_EMPTY_SLOTS && slot.isArmorSlot() && client.player.getEquippedStack(slot).isEmpty()) {
+			if(config.TRIM_EMPTY_SLOTS && slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && client.player.getEquippedStack(slot).isEmpty()) {
 				continue;
 			};
 			x -= armorWidth;
