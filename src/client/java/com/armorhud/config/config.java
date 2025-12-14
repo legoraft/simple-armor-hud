@@ -16,6 +16,7 @@ public class config {
     public static boolean RTL = false;
     public static boolean DISABLE_ARMOR_BAR = false;
     public static boolean ABOVE_HEALTH_BAR = false; // a new option to render armor hud above the healthbar instead of the hungerbar -Dino
+    public static boolean TRIM_EMPTY_SLOTS = false; // toggles trimming space between empty armor slots
 
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
@@ -26,6 +27,7 @@ public class config {
         properties.setProperty("right_to_left", Boolean.toString(RTL));
         properties.setProperty("disable_armor_bar", Boolean.toString(DISABLE_ARMOR_BAR));
         properties.setProperty("above_health_bar", Boolean.toString(ABOVE_HEALTH_BAR));
+        properties.setProperty("trim_empty_slots", Boolean.toString(TRIM_EMPTY_SLOTS));
     }
 
     public void read(Properties properties) {
@@ -35,6 +37,7 @@ public class config {
         RTL = Boolean.parseBoolean(properties.getProperty("right_to_left"));
         DISABLE_ARMOR_BAR = Boolean.parseBoolean(properties.getProperty("disable_armor_bar"));
         ABOVE_HEALTH_BAR = Boolean.parseBoolean(properties.getProperty("above_health_bar"));
+        TRIM_EMPTY_SLOTS = Boolean.parseBoolean(properties.getProperty("trim_empty_slots"));
     }
 
     public static void save() {
