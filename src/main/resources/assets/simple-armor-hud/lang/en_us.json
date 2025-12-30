@@ -14,7 +14,8 @@
   "config.armorposition": "Position",
   "config.armorposition.foodbar": "Above Foodbar",
   "config.armorposition.healthbar": "Above Healthbar",
-  "config.armorposition.hotbar_left": "Left Hotbar",
+  "config.armorposition.hotbar_left": "Left of Hotbar",
+  "config.armorposition.hotbar_right": "Right of Hotbar",
 
   "config.header.general": "General",
   "config.header.compatibility": "Compatibility",
