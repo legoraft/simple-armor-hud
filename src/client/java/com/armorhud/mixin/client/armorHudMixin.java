@@ -152,20 +152,20 @@ public abstract class armorHudMixin {
 			} else if ( config.DISABLE_ARMOR_BAR ) {
 				armorHeight += 10;
 			}
-		}
-
-		if ( client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative() ) {
-			armorHeight -= 10;
-		}
+		} else {
+			if ( client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative() ) {
+				armorHeight -= 10;
+			}
 
 //			Moves armorhud down if player is in creative
-		if ( client.player.isCreative() ) {
-			armorHeight += 16;
-		}
+			if ( client.player.isCreative() ) {
+				armorHeight += 16;
+			}
 
 //			Moves armorhud up if player is on mount, like horse
-		if ( client.player.hasVehicle() && getRiddenEntity() != null ) {
-			moveRiddenEntity();
+			if ( client.player.hasVehicle() && getRiddenEntity() != null ) {
+				moveRiddenEntity();
+			}
 		}
 	}
 
