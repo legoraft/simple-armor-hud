@@ -20,9 +20,15 @@ repositories {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
+
 	maven {
 		name = "Ladysnake Libs"
 		url = 'https://maven.ladysnake.org/releases'
+	}
+
+	maven {
+		name = "Whispforest"
+		url = "https://maven.wispforest.io/releases"
 	}
 }
 
@@ -48,6 +54,9 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Accessories mod
+//	modImplementation("io.wispforest:accessories-fabric:${project.accessories_version}")
 }
 
 processResources {

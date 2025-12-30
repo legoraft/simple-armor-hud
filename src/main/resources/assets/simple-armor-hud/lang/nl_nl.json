@@ -1,12 +1,26 @@
 {
   "key.armorhud.armorvisible": "Zet harnas-hud aan/uit",
-  "category.armorhud.toggles": "Simple armor hud",
+  "key.category.simple-armor-hud.armorhud.toggles": "Simple armor hud",
 
   "config.doublehotbar": "Double Hotbar",
   "config.bettermounthud": "Better Mount Hud",
+
   "config.armorvisible": "Harnas-hud zichtbaar",
   "config.disablearmorbar": "Harnasbalk uitzetten",
 
   "config.righttoleft": "Rechts naar links display",
+  "config.trimemptyslots": "Maak lege slots onzichtbaar",
+
+  "config.armorposition": "Locatie",
+  "config.armorposition.foodbar": "Boven etensbalk",
+  "config.armorposition.healthbar": "Boven levensbalk",
+  "config.armorposition.hotbar_left": "Links van Hotbar",
+  "config.armorposition.hotbar_right": "Rechts van Hotbar",
+
+  "config.header.general": "Algemeen",
+  "config.header.compatibility": "Compatibiliteit",
+  "config.header.display": "Beeld",
+
+  "config.title": "Simple armor hud configuratie scherm",
   "config.done": "Gereed"
 }

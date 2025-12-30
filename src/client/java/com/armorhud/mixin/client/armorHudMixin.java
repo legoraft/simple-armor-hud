@@ -6,13 +6,12 @@ import com.armorhud.config.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,42 +24,84 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class armorHudMixin {
 
 	@Shadow @Final private MinecraftClient client;
-
 	@Shadow protected abstract LivingEntity getRiddenEntity();
-
 	@Unique int armorHeight;
 	@Unique boolean initialized;
 
+	@Unique private final int FOODBAR_X = 91;
+	@Unique private final int HEALTHBAR_X = -10;
+	@Unique private final int HOTBAR_LEFT_X = -83;
+	@Unique private final int HOTBAR_RIGHT_X = 165;
+
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-		if(!config.ARMOR_HUD) { return; }
+		if( !config.ARMOR_HUD ) { return; }
 
 		assert client.player != null;
 
-        if (!initialized) {
+        if ( !initialized ) {
             armorHud.getArmorAccessor().initialize(client.player);
             initialized = true;
         }
 
-		renderArmor(context);
+		switch ( config.position.name() ) {
+			case "FOODBAR":
+				renderArmor(context, FOODBAR_X);
+				break;
+			case "HEALTHBAR":
+				renderArmor(context, HEALTHBAR_X);
+				break;
+			case "HOTBAR_LEFT":
+				renderArmor(context, HOTBAR_LEFT_X);
+				break;
+			case "HOTBAR_RIGHT":
+				if ( client.options.getAttackIndicator().getValue() == AttackIndicator.HOTBAR ) {
+					renderArmor(context, HOTBAR_RIGHT_X + 25);
+				} else {
+					renderArmor(context, HOTBAR_RIGHT_X);
+				}
+				break;
+		}
+
 		moveArmor(context);
 	}
 
 	@Unique
-	private void renderArmor(DrawContext context) {
+	private void renderArmor(DrawContext context, int startXPosition) {
 		int scaledWidth = context.getScaledWindowWidth();
 
 		assert client.player != null;
-		boolean rtl = config.RTL;
-        ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
+		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
-//		Added check for Above_Health_Bar -Dino
-		float hungerX = scaledWidth / 2f + (config.ABOVE_HEALTH_BAR
-				&& client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
+		float hungerX = scaledWidth / 2f + startXPosition;
+		float x = hungerX + hungerWidth + 2;
+
 		EquipmentSlot[] slots = EquipmentSlot.values();
+
+		if (config.RTL) {
+			for ( int i = slots.length - 1; i > 0; i-- ) {
+				EquipmentSlot slot = slots[i];
+				x -= armorWidth;
+
+				if ( slot.isArmorSlot() ) {
+					renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
+				}
+			}
+		} else {
+            for ( EquipmentSlot slot : slots ) {
+                x -= armorWidth;
+
+                if ( slot.isArmorSlot() ) {
+                    renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
+                }
+            }
+		}
+
+/*		Putting this on the backburner for a little while to implement other things - Legoraft
+
 		// counts empty slots to center condensed armor bar, don't like having to loop through the equip slots twice but idk how else to center this dynamically -dino
 		int emptyArmorSlots = 0;
 		if (config.TRIM_EMPTY_SLOTS) {
@@ -70,40 +111,27 @@ public abstract class armorHudMixin {
 				}
 			}
 		}
-		float x = hungerX + hungerWidth - (7*emptyArmorSlots) + 2;
 
-
-		for (int i = rtl ? slots.length-1 : 0; rtl ? i >= 0 : i < slots.length; i += rtl ? -1 : 1) {
-			EquipmentSlot slot = slots[i];
-			if(config.TRIM_EMPTY_SLOTS && slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && client.player.getEquippedStack(slot).isEmpty()) {
-				continue;
-			};
-			x -= armorWidth;
-
-			if (slot.isArmorSlot()) {
-				renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
-			}
-		}
-	}
-
-	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
-	@Unique
-	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
-		if (stack.isEmpty()) return;
-
-		context.getMatrices().pushMatrix();
-		context.getMatrices().translate(x, y);
-
-		context.drawItem(player, stack, 0, 0, 1);
-
-		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
-		context.getMatrices().popMatrix();
+		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2;
+*/
 	}
 
 	@Unique
 	private void moveArmor(DrawContext context) {
-		int scaledHeight = context.getScaledWindowHeight();
+		if ( config.position != config.Position.FOODBAR && config.position != config.Position.HEALTHBAR ) {
+			int scaledHeight = context.getScaledWindowHeight();
 
+			switch ( config.position.name() ) {
+				case "HOTBAR_LEFT", "HOTBAR_RIGHT":
+					armorHeight = scaledHeight - 19;
+					break;
+            }
+
+			return;
+		}
+
+		int scaledHeight = context.getScaledWindowHeight();
+		int healthDisplacement = 0;
 		assert client.player != null;
 
 //		Moves armorhud up if player uses double hotbar
@@ -112,48 +140,50 @@ public abstract class armorHudMixin {
 /*  	TODO: fix visual bug where remaining hearts available (>20hp) get removed later than armor hud -Dino
 		Skips unnecessary checks when Above_Health_Bar is on, not a fan of the extra if statement, but it works -Dino
 		Note: setting gets turned off above 9 rows of hearts, since the hud will fly off the screen at some point -Dino			*/
-		if (config.ABOVE_HEALTH_BAR && client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180) {
+
+		if ( config.position == config.Position.HEALTHBAR ) {
+			if ( client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ) {
 /* 			Displacement calculation extracted for clarity. -Dino
  			Calc breaks above 90 hearts since hearts don't get condensed further, so it overshoots down -Dino			*/
-			int playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
-			int healthDisplacement = (10 * playerHealthRows) - ((playerHealthRows>2) ? (playerHealthRows -2) * (playerHealthRows -1) : 0);
+				int playerHealthRows = (int) Math.ceil((client.player.getMaxHealth() + client.player.getMaxAbsorption()) / 20);
+				healthDisplacement = (10 * playerHealthRows) - ((playerHealthRows>2) ? (playerHealthRows -2) * (playerHealthRows -1) : 0);
 
 //			Moves armorhud up depending on how much health you have, along with negative displacement from higher heart counts -Dino
-			armorHeight -= healthDisplacement;
+				armorHeight -= healthDisplacement;
+			}
 
-/*			Moves armorhud down if player is in creative or Disable_Armor_Bar is on,
-			formatted as an if-statement for readability -Dino
- */
-			if(client.player.isCreative()) {
+			if ( client.player.isCreative() ) {
 				armorHeight += 16 + healthDisplacement;
-			} else if (config.DISABLE_ARMOR_BAR) {
+			} else if ( config.DISABLE_ARMOR_BAR ) {
 				armorHeight += 10;
 			}
 		} else {
-//			Moves armorhud up if player is underwater
-			if ((client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative())) {
+			if ( client.player.getAir() < client.player.getMaxAir() || client.player.isSubmergedInWater() && !client.player.isCreative() ) {
 				armorHeight -= 10;
 			}
 
 //			Moves armorhud down if player is in creative
-			armorHeight += (client.player.isCreative() ? 16 : 0);
+			if ( client.player.isCreative() ) {
+				armorHeight += 16;
+			}
 
 //			Moves armorhud up if player is on mount, like horse
-			if (client.player.hasVehicle() && getRiddenEntity() != null) {
-				moveArmorHorse();
+			if ( client.player.hasVehicle() && getRiddenEntity() != null ) {
+				moveRiddenEntity();
 			}
 		}
 	}
 
 	@Unique
-	private void moveArmorHorse() {
+	private void moveRiddenEntity() {
 		assert client.player != null;
 
 //		Check if entity player is riding is alive, like a horse
-		if (getRiddenEntity().isAlive()) {
+		if ( getRiddenEntity().isAlive() ) {
+
 //		If horse health is 21, it still displays 10 hearts
-			if (getRiddenEntity().getMaxHealth() > 21) {
-				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
+			if ( getRiddenEntity().getMaxHealth() > 21 ) {
+				if ( config.BETTER_MOUNT_HUD && !client.player.isCreative() ) {
 					armorHeight -= 20;
 				} else {
 					armorHeight -= (client.player.isCreative() ? 26 : 10);
@@ -162,13 +192,27 @@ public abstract class armorHudMixin {
 
 //		Armor hud only has to be moved up if better mount hud is enabled or player is in creative
 			else {
-				if (config.BETTER_MOUNT_HUD && !client.player.isCreative()) {
+				if ( config.BETTER_MOUNT_HUD && !client.player.isCreative() ) {
 					armorHeight -= 10;
-				} else if (client.player.isCreative()) {
+				} else if ( client.player.isCreative() ) {
 					armorHeight -= 16;
 				}
 			}
 		}
+	}
+
+	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
+	@Unique
+	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
+		if ( stack.isEmpty() ) return;
+
+		context.getMatrices().pushMatrix();
+		context.getMatrices().translate(x, y);
+
+		context.drawItem(player, stack, 0, 0, 1);
+
+		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
+		context.getMatrices().popMatrix();
 	}
 
 }
