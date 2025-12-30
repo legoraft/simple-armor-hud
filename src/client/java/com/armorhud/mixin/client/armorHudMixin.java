@@ -105,20 +105,6 @@ public abstract class armorHudMixin {
 */
 	}
 
-	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
-	@Unique
-	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
-		if ( stack.isEmpty() ) return;
-
-		context.getMatrices().pushMatrix();
-		context.getMatrices().translate(x, y);
-
-		context.drawItem(player, stack, 0, 0, 1);
-
-		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
-		context.getMatrices().popMatrix();
-	}
-
 	@Unique
 	private void moveArmor(DrawContext context) {
 		if ( config.position != config.Position.FOODBAR && config.position != config.Position.HEALTHBAR ) {
@@ -194,6 +180,20 @@ public abstract class armorHudMixin {
 				}
 			}
 		}
+	}
+
+	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
+	@Unique
+	private void renderArmorPiece(DrawContext context, float x, float y, PlayerEntity player, ItemStack stack) {
+		if ( stack.isEmpty() ) return;
+
+		context.getMatrices().pushMatrix();
+		context.getMatrices().translate(x, y);
+
+		context.drawItem(player, stack, 0, 0, 1);
+
+		context.drawStackOverlay(this.client.textRenderer, stack, 0,0);
+		context.getMatrices().popMatrix();
 	}
 
 }
