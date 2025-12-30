@@ -4,14 +4,18 @@
 
   "config.doublehotbar": "Double Hotbar",
   "config.bettermounthud": "Better Mount Hud",
+
   "config.armorvisible": "Armor visible",
-  "config.righttoleft": "Right to left display",
   "config.disablearmorbar": "Disable armor bar",
-  "config.hudposition": "Render",
-  "simple_armor_hud.render.above_food_bar": "Above Food Bar",
-  "simple_armor_hud.render.above_armor_bar": "Above Armor Bar",
+
+  "config.righttoleft": "Right to left display",
   "config.trimemptyslots": "Trim Empty Slots",
 
-  "config.title": "Armor hud config screen",
+  "config.armorposition": "Render",
+  "config.armorposition.foodbar": "Above Foodbar",
+  "config.armorposition.healthbar": "Above Healthbar",
+  "config.armorposition.hotbar_left": "Left Hotbar",
+
+  "config.title": "Simple armor hud config screen",
   "config.done": "Done"
 }

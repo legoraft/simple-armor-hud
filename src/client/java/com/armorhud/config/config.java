@@ -1,6 +1,7 @@
 package com.armorhud.config;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
@@ -22,7 +23,12 @@ public class config {
 
     public enum Position {
         FOODBAR,
-        HEALTHBAR
+        HEALTHBAR,
+        HOTBAR_LEFT;
+
+        public Text displayName() {
+            return Text.translatable("config.armorposition." + name().toLowerCase());
+        }
     }
 
     public static void write(Properties properties) {
