@@ -25,11 +25,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class armorHudMixin {
 
 	@Shadow @Final private MinecraftClient client;
-
 	@Shadow protected abstract LivingEntity getRiddenEntity();
-
 	@Unique int armorHeight;
 	@Unique boolean initialized;
+
+	@Unique private final int FOODBAR_X = 91;
+	@Unique private final int HEALTHBAR_X = -10;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
@@ -42,24 +43,56 @@ public abstract class armorHudMixin {
             initialized = true;
         }
 
-		renderArmor(context);
+		switch (config.position.name()) {
+			case "FOODBAR":
+				renderArmor(context, FOODBAR_X);
+				break;
+			case "HEALTHBAR":
+				renderArmor(context, HEALTHBAR_X);
+				break;
+			default:
+				renderArmor(context, FOODBAR_X);
+				break;
+		}
+
 		moveArmor(context);
 	}
 
 	@Unique
-	private void renderArmor(DrawContext context) {
+	private void renderArmor(DrawContext context, int startXPosition) {
 		int scaledWidth = context.getScaledWindowWidth();
 
 		assert client.player != null;
-		boolean rtl = config.RTL;
-        ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
+		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
-//		Added check for Above_Health_Bar -Dino
-		float hungerX = scaledWidth / 2f + (client.player.getMaxHealth() + client.player.getMaxAbsorption() < 180 ? -10 : 91);
+		float hungerX = scaledWidth / 2f + startXPosition;
+		float x = hungerX + hungerWidth + 2;
+
 		EquipmentSlot[] slots = EquipmentSlot.values();
+
+		if (config.RTL) {
+			for ( int i = slots.length - 1; i > 0; i-- ) {
+				EquipmentSlot slot = slots[i];
+				x -= armorWidth;
+
+				if (slot.isArmorSlot()) {
+					renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
+				}
+			}
+		} else {
+            for (EquipmentSlot slot : slots) {
+                x -= armorWidth;
+
+                if (slot.isArmorSlot()) {
+                    renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
+                }
+            }
+		}
+
+/*		Putting this on the backburner for a little while to implement other things
 		// counts empty slots to center condensed armor bar, don't like having to loop through the equip slots twice but idk how else to center this dynamically -dino
 		int emptyArmorSlots = 0;
 		if (config.TRIM_EMPTY_SLOTS) {
@@ -69,20 +102,9 @@ public abstract class armorHudMixin {
 				}
 			}
 		}
-		float x = hungerX + hungerWidth - (7*emptyArmorSlots) + 2;
 
-
-		for (int i = rtl ? slots.length-1 : 0; rtl ? i >= 0 : i < slots.length; i += rtl ? -1 : 1) {
-			EquipmentSlot slot = slots[i];
-			if(config.TRIM_EMPTY_SLOTS && slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && client.player.getEquippedStack(slot).isEmpty()) {
-				continue;
-			};
-			x -= armorWidth;
-
-			if (slot.isArmorSlot()) {
-				renderArmorPiece(context, x, armorHeight, client.player, armorAccessor.getArmorPiece(client.player, slot));
-			}
-		}
+		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2;
+*/
 	}
 
 	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
