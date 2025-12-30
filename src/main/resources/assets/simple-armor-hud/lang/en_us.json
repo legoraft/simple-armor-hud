@@ -10,6 +10,7 @@
   "config.hudposition": "Render",
   "simple_armor_hud.render.above_food_bar": "Above Food Bar",
   "simple_armor_hud.render.above_armor_bar": "Above Armor Bar",
+  "config.trimemptyslots": "Trim Empty Slots",
 
   "config.title": "Armor hud config screen",
   "config.done": "Done"
