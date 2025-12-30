@@ -11,7 +11,7 @@
   "config.righttoleft": "Right to left display",
   "config.trimemptyslots": "Trim Empty Slots",
 
-  "config.armorposition": "Render",
+  "config.armorposition": "Position",
   "config.armorposition.foodbar": "Above Foodbar",
   "config.armorposition.healthbar": "Above Healthbar",
   "config.armorposition.hotbar_left": "Left Hotbar",
