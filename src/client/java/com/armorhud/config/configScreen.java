@@ -5,8 +5,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
 
-import java.awt.*;
-
 public class configScreen extends Screen {
     private final Screen parent;
 
@@ -40,9 +38,7 @@ public class configScreen extends Screen {
                 .build(Text.translatable("config.disablearmorbar"), ((button, value) -> config.DISABLE_ARMOR_BAR = !config.DISABLE_ARMOR_BAR));
 
         armorPosition = CyclingButtonWidget.builder(config.Position::displayName, config.Position.valueOf(String.valueOf(config.position))).values(config.Position.values())
-                .build(Text.translatable("config.armorposition"), ((button, value) -> {
-                    config.position = value;
-                }));
+                .build(Text.translatable("config.armorposition"), ((button, value) -> config.position = value));
 
         rightToLeftToggle = CyclingButtonWidget.onOffBuilder(config.RTL)
                 .build(Text.translatable("config.righttoleft"), (button, value) -> config.RTL = !config.RTL);
