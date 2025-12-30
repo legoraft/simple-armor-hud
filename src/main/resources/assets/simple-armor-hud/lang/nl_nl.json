@@ -16,6 +16,10 @@
   "config.armorposition.healthbar": "Boven levensbalk",
   "config.armorposition.hotbar_left": "Linker Hotbar",
 
+  "config.header.general": "Algemeen",
+  "config.header.compatibility": "Compatibiliteit",
+  "config.header.display": "Beeld",
+
   "config.title": "Simple armor hud configuratie scherm",
   "config.done": "Gereed"
 }
