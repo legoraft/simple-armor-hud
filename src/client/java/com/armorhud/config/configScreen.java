@@ -51,8 +51,6 @@ public class configScreen extends Screen {
                 .dimensions(width / 2 - 100, height - 25, 200, 20)
                 .build();
 
-        addDrawableChild(armorPosition);
-
         addDrawableChild(doneButton);
     }
 
