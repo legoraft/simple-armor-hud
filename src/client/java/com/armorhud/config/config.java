@@ -24,7 +24,8 @@ public class config {
     public enum Position {
         FOODBAR,
         HEALTHBAR,
-        HOTBAR_LEFT;
+        HOTBAR_LEFT,
+        HOTBAR_RIGHT;
 
         public Text displayName() {
             return Text.translatable("config.armorposition." + name().toLowerCase());

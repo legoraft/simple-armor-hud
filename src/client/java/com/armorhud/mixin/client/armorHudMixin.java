@@ -29,6 +29,8 @@ public abstract class armorHudMixin {
 
 	@Unique private final int FOODBAR_X = 91;
 	@Unique private final int HEALTHBAR_X = -10;
+	@Unique private final int HOTBAR_LEFT_X = -83;
+	@Unique private final int HOTBAR_RIGHT_X = 165;
 
 	@Inject(at = @At("TAIL"), method = "renderHotbar")
 	private void renderHud(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
@@ -47,6 +49,12 @@ public abstract class armorHudMixin {
 				break;
 			case "HEALTHBAR":
 				renderArmor(context, HEALTHBAR_X);
+				break;
+			case "HOTBAR_LEFT":
+				renderArmor(context, HOTBAR_LEFT_X);
+				break;
+			case "HOTBAR_RIGHT":
+				renderArmor(context, HOTBAR_RIGHT_X);
 				break;
 			default:
 				renderArmor(context, FOODBAR_X);
@@ -108,6 +116,14 @@ public abstract class armorHudMixin {
 	@Unique
 	private void moveArmor(DrawContext context) {
 		if ( config.position != config.Position.FOODBAR && config.position != config.Position.HEALTHBAR ) {
+			int scaledHeight = context.getScaledWindowHeight();
+
+			switch ( config.position.name() ) {
+				case "HOTBAR_LEFT", "HOTBAR_RIGHT":
+					armorHeight = scaledHeight - 19;
+					break;
+            }
+
 			return;
 		}
 
