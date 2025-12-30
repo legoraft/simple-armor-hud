@@ -6,6 +6,7 @@ import com.armorhud.config.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -54,7 +55,11 @@ public abstract class armorHudMixin {
 				renderArmor(context, HOTBAR_LEFT_X);
 				break;
 			case "HOTBAR_RIGHT":
-				renderArmor(context, HOTBAR_RIGHT_X);
+				if ( client.options.getAttackIndicator().getValue() == AttackIndicator.HOTBAR ) {
+					renderArmor(context, HOTBAR_RIGHT_X + 25);
+				} else {
+					renderArmor(context, HOTBAR_RIGHT_X);
+				}
 				break;
 			default:
 				renderArmor(context, FOODBAR_X);
