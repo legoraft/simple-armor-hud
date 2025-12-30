@@ -61,9 +61,6 @@ public abstract class armorHudMixin {
 					renderArmor(context, HOTBAR_RIGHT_X);
 				}
 				break;
-			default:
-				renderArmor(context, FOODBAR_X);
-				break;
 		}
 
 		moveArmor(context);
