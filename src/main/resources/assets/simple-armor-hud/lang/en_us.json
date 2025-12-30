@@ -16,6 +16,10 @@
   "config.armorposition.healthbar": "Above Healthbar",
   "config.armorposition.hotbar_left": "Left Hotbar",
 
+  "config.header.general": "General settings",
+  "config.header.compatibility": "Compatibility settings",
+  "config.header.display": "Display settings",
+
   "config.title": "Simple armor hud config screen",
   "config.done": "Done"
 }

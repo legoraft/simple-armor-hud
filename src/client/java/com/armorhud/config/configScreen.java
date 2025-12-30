@@ -57,10 +57,13 @@ public class configScreen extends GameOptionsScreen {
                 .build();
 
         OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
+        optionListWidget.addHeader(Text.translatable("config.header.general"));
         optionListWidget.addWidgetEntry(armorHudToggle, disableArmorBar);
 
+        optionListWidget.addHeader(Text.translatable("config.header.compatibility"));
         optionListWidget.addWidgetEntry(betterMountHudToggle, doubleHotbarToggle);
 
+        optionListWidget.addHeader(Text.translatable("config.header.display"));
         optionListWidget.addWidgetEntry(armorPosition, rightToLeftToggle);
         optionListWidget.addWidgetEntry(trimEmptySlots, null);
 
