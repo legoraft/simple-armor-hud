@@ -1,15 +1,20 @@
 package com.armorhud.config;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.text.Text;
 
-public class configScreen extends Screen {
+@Environment(EnvType.CLIENT)
+public class configScreen extends GameOptionsScreen {
     private final Screen parent;
 
     public configScreen(Screen parent) {
-        super(Text.translatable("config.title"));
+        super(parent, MinecraftClient.getInstance().options, Text.translatable("config.title"));
         this.parent = parent;
     }
 
@@ -51,13 +56,24 @@ public class configScreen extends Screen {
                 .dimensions(width / 2 - 100, height - 25, 200, 20)
                 .build();
 
+        OptionListWidget optionListWidget = this.addDrawableChild(new OptionListWidget(this.client, this.width, this));
+        optionListWidget.addWidgetEntry(armorHudToggle, disableArmorBar);
+
+        optionListWidget.addWidgetEntry(betterMountHudToggle, doubleHotbarToggle);
+
+        optionListWidget.addWidgetEntry(armorPosition, rightToLeftToggle);
+        optionListWidget.addWidgetEntry(trimEmptySlots, null);
+
         addDrawableChild(doneButton);
     }
 
+    @Override
+    protected void addOptions() { }
+
+    @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("config.title"), this.width / 2, 12, 0xffffff);
         super.render(context, mouseX, mouseY, delta);
-        context.drawCenteredTextWithShadow(textRenderer, super.title, width / 2, 12, 0xffffff);
-        super.init();
     }
 
     @Override
