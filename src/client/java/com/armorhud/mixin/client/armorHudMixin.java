@@ -8,7 +8,6 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +18,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(Gui.class)
 public abstract class armorHudMixin {
@@ -72,19 +73,16 @@ public abstract class armorHudMixin {
 
 		assert minecraft.player != null;
 		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
-		EquipmentSlot[] slots = EquipmentSlot.values();
+		List<ItemStack> armorPieces = armorAccessor.getArmorPieces(minecraft.player);
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
 		int emptyArmorSlots = 0;
-		if (config.TRIM_EMPTY_SLOTS) {
-			for (EquipmentSlot slot : slots) {
-				if (slot.isArmor()) {
-					ItemStack stack = armorAccessor.getArmorPiece(minecraft.player, slot);
-					if (stack.isEmpty()) {
-						emptyArmorSlots++;
-					}
+		if ( config.TRIM_EMPTY_SLOTS ) {
+			for ( ItemStack stack : armorPieces ) {
+				if ( stack.isEmpty() ) {
+					emptyArmorSlots++;
 				}
 			}
 		}
@@ -95,11 +93,9 @@ public abstract class armorHudMixin {
 		if (config.RTL) {
 			if ( config.TRIM_EMPTY_SLOTS ) { x -= (float) (( (float) armorWidth / 2 ) + 0.5); }
 			x += armorWidth;
-			for ( int i = slots.length - 1; i > 0; i-- ) {
-				EquipmentSlot slot = slots[i];
-				if (!slot.isArmor()) continue;
-				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
+			armorPieces = armorPieces.reversed();
 
+			for ( ItemStack armor : armorPieces ) {
 				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
 				x -= armorWidth;
 
@@ -107,15 +103,12 @@ public abstract class armorHudMixin {
 			}
 		} else {
 			if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
-            for ( EquipmentSlot slot : slots ) {
-				if ( !slot.isArmor() ) continue;
-				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
-
-				if ( config.TRIM_EMPTY_SLOTS && armor.isEmpty() ) continue;
+			for ( ItemStack armor : armorPieces ) {
+				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
 				x -= armorWidth;
 
 				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
-            }
+			}
 		}
 	}
 
