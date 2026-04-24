@@ -1,0 +1,25 @@
+{
+  "key.armorhud.armorvisible": "Bật/Tắt hiển thị HUD của giáp",
+  "key.category.simple-armor-hud.armorhud.toggles": "Simple armor HUD",
+
+  "config.doublehotbar": "Double Hotbar",
+  "config.bettermounthud": "Better Mount Hud",
+
+  "config.armorvisible": "Hiển thị giáp",
+  "config.disablearmorbar": "Tắt thanh hiển thị giáp",
+
+  "config.righttoleft": "Hiển thị từ phải sang trái",
+  "config.trimemptyslots": "Ẩn các ô trống",
+
+  "config.armorposition": "Vị trí",
+  "config.armorposition.foodbar": "Phía trên thanh thức ăn",
+  "config.armorposition.healthbar": "Phía trên thanh máu",
+  "config.armorposition.hotbar_left": "Phía bên trái thanh công cụ nhanh",
+  "config.armorposition.hotbar_right": "Phía bên phải thanh công cụ nhanh",
+
+  "config.header.general": "Chung",
+  "config.header.compatibility": "Khả năng Tương tích",
+
+  "config.title": "Màn hình cấu hình của Simple armor HUD",
+  "config.done": "Xong"
+}
