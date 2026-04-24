@@ -91,9 +91,10 @@ public abstract class armorHudMixin {
 
 		float hungerX = scaledWidth / 2f + startXPosition;
 		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2 - (armorWidth * 2);
-		if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
 
 		if (config.RTL) {
+			if ( config.TRIM_EMPTY_SLOTS ) { x -= (float) (( (float) armorWidth / 2 ) + 0.5); }
+			x += armorWidth;
 			for ( int i = slots.length - 1; i > 0; i-- ) {
 				EquipmentSlot slot = slots[i];
 				if (!slot.isArmor()) continue;
@@ -105,6 +106,7 @@ public abstract class armorHudMixin {
 				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
 			}
 		} else {
+			if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
             for ( EquipmentSlot slot : slots ) {
 				if ( !slot.isArmor() ) continue;
 				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
