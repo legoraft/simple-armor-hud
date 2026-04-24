@@ -22,13 +22,18 @@ public class config {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("armorhud.properties");
 
     public enum Position {
-        FOODBAR,
-        HEALTHBAR,
-        HOTBAR_LEFT,
-        HOTBAR_RIGHT;
+        FOODBAR("config.armorposition.foodbar"),
+        HEALTHBAR("config.armorposition.healthbar"),
+        HOTBAR_LEFT("config.armorposition.hotbar_left"),
+        HOTBAR_RIGHT("config.armorposition.hotbar_right");
 
-        public Component displayName() {
-            return Component.translatable("config.armorposition." + name().toLowerCase());
+        private final String key;
+        Position(String key) {
+            this.key = key;
+        }
+
+        public Component getDisplayName() {
+            return Component.translatable(this.key);
         }
     }
 

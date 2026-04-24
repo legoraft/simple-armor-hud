@@ -72,48 +72,51 @@ public abstract class armorHudMixin {
 
 		assert minecraft.player != null;
 		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
+		EquipmentSlot[] slots = EquipmentSlot.values();
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
-		float hungerX = scaledWidth / 2f + startXPosition;
-		float x = hungerX + hungerWidth + 2;
-
-		EquipmentSlot[] slots = EquipmentSlot.values();
-
-		if (config.RTL) {
-			for ( int i = slots.length - 1; i > 0; i-- ) {
-				EquipmentSlot slot = slots[i];
-				x -= armorWidth;
-
-				if ( slot.isArmor() ) {
-					renderArmorPiece(context, x, armorHeight, minecraft.player, armorAccessor.getArmorPiece(minecraft.player, slot));
-				}
-			}
-		} else {
-            for ( EquipmentSlot slot : slots ) {
-                x -= armorWidth;
-
-                if ( slot.isArmor() ) {
-                    renderArmorPiece(context, x, armorHeight, minecraft.player, armorAccessor.getArmorPiece(minecraft.player, slot));
-                }
-            }
-		}
-
-/*		Putting this on the backburner for a little while to implement other things - Legoraft
-
-		// counts empty slots to center condensed armor bar, don't like having to loop through the equip slots twice but idk how else to center this dynamically -dino
 		int emptyArmorSlots = 0;
 		if (config.TRIM_EMPTY_SLOTS) {
-			for (int i = 2; i<6; i++) { // checks players armor slots only. probably makes stuff like trinkets incompatible -dino
-				if(client.player.getEquippedStack(slots[i]).isEmpty()) {
-					emptyArmorSlots++;
+			for (EquipmentSlot slot : slots) {
+				if (slot.isArmor()) {
+					ItemStack stack = armorAccessor.getArmorPiece(minecraft.player, slot);
+					if (stack.isEmpty()) {
+						emptyArmorSlots++;
+					}
 				}
 			}
 		}
 
-		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2;
-*/
+		float hungerX = scaledWidth / 2f + startXPosition;
+		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2 - (armorWidth * 2);
+
+		if (config.RTL) {
+			if ( config.TRIM_EMPTY_SLOTS ) { x -= (float) (( (float) armorWidth / 2 ) + 0.5); }
+			x += armorWidth;
+			for ( int i = slots.length - 1; i > 0; i-- ) {
+				EquipmentSlot slot = slots[i];
+				if (!slot.isArmor()) continue;
+				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
+
+				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
+				x -= armorWidth;
+
+				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
+			}
+		} else {
+			if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
+            for ( EquipmentSlot slot : slots ) {
+				if ( !slot.isArmor() ) continue;
+				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
+
+				if ( config.TRIM_EMPTY_SLOTS && armor.isEmpty() ) continue;
+				x -= armorWidth;
+
+				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
+            }
+		}
 	}
 
 	@Unique

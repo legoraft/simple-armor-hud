@@ -5,7 +5,6 @@
 <h1 align="center">Simple armor hud</h1>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/for%20MC-1.17.x,%201.18.x,%201.19.x,%201.20.x-green" alt="Minecraft version"/>
     <img src="https://img.shields.io/github/v/release/LegoRaft/simple-armor-hud?color=yellow" alt="Release"/>
     <img src="https://img.shields.io/modrinth/dt/tJflAtvJ?label=modrinth" alt="Modrinth downloads"/>
     <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
@@ -15,7 +14,7 @@
 This mod shows your armor above the foodbar in the in-game hud. It also moves armor up when underwater and down when in creative and has a few config options for compatibility with other mods. You can toggle the armor hud on or off with a keybind, configurable through the normal menu.
 
 ### Features
-<img src="https://user-images.githubusercontent.com/50689727/130084592-5a35579a-f300-4c6e-b6ad-9b6bd620904c.png"  alt="armor hud third person" width="640"/> <br>
+<img src="https://cdn.modrinth.com/data/tJflAtvJ/images/e9e59b541926f4ef4ab4081a2d5fb39ed7926711.png"  alt="armor hud in third person" width="640"/> <br>
 _Shows armor you're currently wearing_
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/dcc817d1be3765a8af5ef581bff1abe909c77e47.png" alt="armor hud underwater" width="640"/><br>
 _Moves armor up underwater_
@@ -24,7 +23,14 @@ _Moves armor up underwater_
 If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls).
 
 ### Translations
-This mod is available with english and dutch translations, if you know any other translations, create a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) with a new [lang](https://github.com/legoraft/simple-armor-hud/tree/main/src/main/resources/assets/simple-armor-hud/lang) file with your translation.
+This mod currently supports the following languages:
+- English
+- Dutch
+- German
+- Vietnamese
+- Traditional Chinese
+
+If you see any missing languages or ar familiar translating, feel free to open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) and add your translation in a new [lang file](https://github.com/legoraft/simple-armor-hud/tree/main/src/main/resources/assets/simple-armor-hud/lang). The [`en_us.json`](https://github.com/legoraft/simple-armor-hud/blob/main/src/main/resources/assets/simple-armor-hud/lang/en_us.json) file is the source of truth for translation keys, so reference that one.
 
 ### Dependencies
 Simple armor hud requires the [Fabric API](https://modrinth.com/mod/fabric-api)
