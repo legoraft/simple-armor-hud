@@ -44,9 +44,9 @@ public class configScreen extends OptionsSubScreen {
 
         this.list.addHeader(Component.translatable("config.header.display"));
         this.list.addSmall(
+                armorPositionOptions,
                 OptionInstance.createBoolean("config.righttoleft", config.RTL, v -> config.RTL = v),
-                OptionInstance.createBoolean("config.trimemptyslots", config.TRIM_EMPTY_SLOTS, v -> config.TRIM_EMPTY_SLOTS = v),
-                armorPositionOptions
+                OptionInstance.createBoolean("config.trimemptyslots", config.TRIM_EMPTY_SLOTS, v -> config.TRIM_EMPTY_SLOTS = v)
         );
     }
 
