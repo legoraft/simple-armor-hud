@@ -7,26 +7,26 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanillaArmorAccessor implements ArmorAccessor {
+public class CombinedArmorAccessor implements ArmorAccessor {
+    private final List<ArmorAccessor> accessors = new ArrayList<>();
+
+    public void addAccessor(ArmorAccessor accessor) {
+        accessors.add(accessor);
+    }
 
     @Override
     public List<ItemStack> getArmorPieces(LocalPlayer player) {
         List<ItemStack> armorList = new ArrayList<>();
 
-        for ( EquipmentSlot slot : EquipmentSlot.values() ) {
-            if ( slot.isArmor() ) {
-                armorList.add(player.getItemBySlot(slot));
-            }
+        for ( ArmorAccessor accessor : accessors ) {
+            armorList.addAll(accessor.getArmorPieces(player));
         }
 
         return armorList;
     }
 
+    @Override
     public ItemStack getArmorPiece(LocalPlayer player, EquipmentSlot slot) {
-        if (!slot.isArmor()) {
-            throw new IllegalArgumentException("Invalid slot type: " + slot);
-        }
-
-        return player.getItemBySlot(slot);
+        return null;
     }
 }

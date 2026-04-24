@@ -1,6 +1,7 @@
 package com.armorhud;
 
 import com.armorhud.armor.ArmorAccessor;
+import com.armorhud.armor.CombinedArmorAccessor;
 import com.armorhud.armor.VanillaArmorAccessor;
 import com.armorhud.config.config;
 import com.armorhud.util.armorHudRegistries;
@@ -18,7 +19,7 @@ public class armorHud implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("Simple Armor Hud loaded!");
-        armorAccessor = new VanillaArmorAccessor();
+        armorAccessor = new CombinedArmorAccessor();
         CONFIG.load();
         armorHudRegistries.registerArmorHud();
         handleKeys();
