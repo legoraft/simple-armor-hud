@@ -1,7 +1,7 @@
 package com.armorhud.config;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
@@ -27,8 +27,8 @@ public class config {
         HOTBAR_LEFT,
         HOTBAR_RIGHT;
 
-        public Text displayName() {
-            return Text.translatable("config.armorposition." + name().toLowerCase());
+        public Component displayName() {
+            return Component.translatable("config.armorposition." + name().toLowerCase());
         }
     }
 
