@@ -9,6 +9,9 @@ import java.util.List;
 public interface ArmorAccessor {
 
     default void initialize(LocalPlayer player) { }
+    default String getName() {
+        return this.getClass().getSimpleName();
+    }
 
     List<ItemStack> getArmorPieces(LocalPlayer player);
     ItemStack getArmorPiece(LocalPlayer player, EquipmentSlot slot);

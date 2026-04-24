@@ -10,6 +10,11 @@ import java.util.List;
 public class VanillaArmorAccessor implements ArmorAccessor {
 
     @Override
+    public String getName() {
+        return "Vanilla";
+    }
+
+    @Override
     public List<ItemStack> getArmorPieces(LocalPlayer player) {
         List<ItemStack> armorList = new ArrayList<>();
 

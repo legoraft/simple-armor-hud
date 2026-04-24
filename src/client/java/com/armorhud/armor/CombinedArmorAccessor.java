@@ -14,6 +14,10 @@ public class CombinedArmorAccessor implements ArmorAccessor {
         accessors.add(accessor);
     }
 
+    public List<ArmorAccessor> getAccessors() {
+        return accessors;
+    }
+
     @Override
     public List<ItemStack> getArmorPieces(LocalPlayer player) {
         List<ItemStack> armorList = new ArrayList<>();
