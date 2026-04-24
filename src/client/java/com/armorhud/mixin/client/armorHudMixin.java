@@ -115,22 +115,6 @@ public abstract class armorHudMixin {
 				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
             }
 		}
-		System.out.println(x);
-
-/*		Putting this on the backburner for a little while to implement other things - Legoraft
-
-		// counts empty slots to center condensed armor bar, don't like having to loop through the equip slots twice but idk how else to center this dynamically -dino
-		int emptyArmorSlots = 0;
-		if (config.TRIM_EMPTY_SLOTS) {
-			for (int i = 2; i<6; i++) { // checks players armor slots only. probably makes stuff like trinkets incompatible -dino
-				if(client.player.getEquippedStack(slots[i]).isEmpty()) {
-					emptyArmorSlots++;
-				}
-			}
-		}
-
-		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2;
-*/
 	}
 
 	@Unique
