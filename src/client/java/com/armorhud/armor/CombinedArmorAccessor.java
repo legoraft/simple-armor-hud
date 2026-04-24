@@ -1,7 +1,6 @@
 package com.armorhud.armor;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -27,10 +26,5 @@ public class CombinedArmorAccessor implements ArmorAccessor {
         }
 
         return armorList;
-    }
-
-    @Override
-    public ItemStack getArmorPiece(LocalPlayer player, EquipmentSlot slot) {
-        return null;
     }
 }

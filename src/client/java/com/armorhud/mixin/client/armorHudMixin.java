@@ -8,7 +8,6 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -76,8 +75,6 @@ public abstract class armorHudMixin {
 		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
 		List<ItemStack> armorPieces = armorAccessor.getArmorPieces(minecraft.player);
 
-//		EquipmentSlot[] slots = EquipmentSlot.values();
-
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
@@ -89,19 +86,6 @@ public abstract class armorHudMixin {
 				}
 			}
 		}
-	/*
-		if (config.TRIM_EMPTY_SLOTS) {
-			for (EquipmentSlot slot : slots) {
-				if (slot.isArmor()) {
-					ItemStack stack = armorAccessor.getArmorPiece(minecraft.player, slot);
-					if (stack.isEmpty()) {
-						emptyArmorSlots++;
-					}
-				}
-			}
-		}
-
-	 */
 
 		float hungerX = scaledWidth / 2f + startXPosition;
 		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2 - (armorWidth * 2);
@@ -117,19 +101,6 @@ public abstract class armorHudMixin {
 
 				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
 			}
-
-			/*for ( int i = slots.length - 1; i > 0; i-- ) {
-				EquipmentSlot slot = slots[i];
-				if (!slot.isArmor()) continue;
-				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
-
-				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
-				x -= armorWidth;
-
-				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
-			}
-
-			 */
 		} else {
 			if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
 			for ( ItemStack armor : armorPieces ) {
@@ -138,18 +109,6 @@ public abstract class armorHudMixin {
 
 				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
 			}
-
-            /*for ( EquipmentSlot slot : slots ) {
-				if ( !slot.isArmor() ) continue;
-				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
-
-				if ( config.TRIM_EMPTY_SLOTS && armor.isEmpty() ) continue;
-				x -= armorWidth;
-
-				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
-            }
-
-             */
 		}
 	}
 

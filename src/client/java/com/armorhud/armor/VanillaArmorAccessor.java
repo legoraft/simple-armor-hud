@@ -26,12 +26,4 @@ public class VanillaArmorAccessor implements ArmorAccessor {
 
         return armorList;
     }
-
-    public ItemStack getArmorPiece(LocalPlayer player, EquipmentSlot slot) {
-        if (!slot.isArmor()) {
-            throw new IllegalArgumentException("Invalid slot type: " + slot);
-        }
-
-        return player.getItemBySlot(slot);
-    }
 }
