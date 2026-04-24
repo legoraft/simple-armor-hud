@@ -8,8 +8,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.network.chat.Component;
 
-import javax.swing.text.html.Option;
-
 @Environment(EnvType.CLIENT)
 public class configScreen extends OptionsSubScreen {
     private final Screen parent;
