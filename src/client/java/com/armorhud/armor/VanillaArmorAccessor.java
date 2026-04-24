@@ -1,16 +1,16 @@
 package com.armorhud.armor;
 
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 
 public class VanillaArmorAccessor implements ArmorAccessor {
 
-    public ItemStack getArmorPiece(ClientPlayerEntity player, EquipmentSlot slot) {
-        if (!slot.isArmorSlot()) {
+    public ItemStack getArmorPiece(LocalPlayer player, EquipmentSlot slot) {
+        if (!slot.isArmor()) {
             throw new IllegalArgumentException("Invalid slot type: " + slot);
         }
 
-        return player.getEquippedStack(slot);
+        return player.getItemBySlot(slot);
     }
 }

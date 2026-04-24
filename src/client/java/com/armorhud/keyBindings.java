@@ -1,19 +1,19 @@
 package com.armorhud;
 
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.minecraft.client.KeyMapping;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.resources.Identifier;
 
 public class keyBindings {
 
-    public static KeyBinding armorHudToggle;
+    public static KeyMapping armorHudToggle;
 
     public static void registerKeys() {
-        final KeyBinding.Category category = KeyBinding.Category.create(Identifier.of("simple-armor-hud", "armorhud.toggles"));
-        armorHudToggle = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        final KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("simple-armor-hud", "armorhud.toggles"));
+        armorHudToggle = KeyMappingHelper.registerKeyMapping(new KeyMapping(
             "key.armorhud.armorvisible",
-            InputUtil.UNKNOWN_KEY.getCode(),
+            InputConstants.UNKNOWN.getValue(),
             category
         ));
     }
