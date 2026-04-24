@@ -23,7 +23,14 @@ _Moves armor up underwater_
 If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls).
 
 ### Translations
-This mod is available with english and dutch translations, if you know any other translations, create a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) with a new [lang](https://github.com/legoraft/simple-armor-hud/tree/main/src/main/resources/assets/simple-armor-hud/lang) file with your translation.
+This mod currently supports the following languages:
+- English
+- Dutch
+- German
+- Vietnamese
+- Traditional Chinese
+
+If you see any missing languages or ar familiar translating, feel free to open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) and add your translation in a new [lang file](https://github.com/legoraft/simple-armor-hud/tree/main/src/main/resources/assets/simple-armor-hud/lang). The [`en_us.json`](https://github.com/legoraft/simple-armor-hud/blob/main/src/main/resources/assets/simple-armor-hud/lang/en_us.json) file is the source of truth for translation keys, so reference that one.
 
 ### Dependencies
 Simple armor hud requires the [Fabric API](https://modrinth.com/mod/fabric-api)
