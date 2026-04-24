@@ -28,7 +28,7 @@ public class armorHud implements ClientModInitializer {
 
     public void handleKeys() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (keyBindings.armorHudToggle.wasPressed()) {
+            if (keyBindings.armorHudToggle.consumeClick()) {
                 config.ARMOR_HUD = !config.ARMOR_HUD;
             }
         });
