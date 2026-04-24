@@ -3,6 +3,7 @@ package com.armorhud.util;
 import com.armorhud.config.configScreen;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import net.minecraft.client.gui.screens.Screen;
 
 public class armorHudModMenu implements ModMenuApi {
 
@@ -11,7 +12,7 @@ public class armorHudModMenu implements ModMenuApi {
         return this::createConfigScreen;
     }
 
-    private configScreen createConfigScreen(configScreen parent) {
+    private Screen createConfigScreen(Screen parent) {
         return new configScreen(parent);
     }
 
