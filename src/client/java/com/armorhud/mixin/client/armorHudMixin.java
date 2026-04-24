@@ -72,33 +72,50 @@ public abstract class armorHudMixin {
 
 		assert minecraft.player != null;
 		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
+		EquipmentSlot[] slots = EquipmentSlot.values();
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
 		final int armorWidth = 15;
 
-		float hungerX = scaledWidth / 2f + startXPosition;
-		float x = hungerX + hungerWidth + 2;
+		int emptyArmorSlots = 0;
+		if (config.TRIM_EMPTY_SLOTS) {
+			for (EquipmentSlot slot : slots) {
+				if (slot.isArmor()) {
+					ItemStack stack = armorAccessor.getArmorPiece(minecraft.player, slot);
+					if (stack.isEmpty()) {
+						emptyArmorSlots++;
+					}
+				}
+			}
+		}
 
-		EquipmentSlot[] slots = EquipmentSlot.values();
+		float hungerX = scaledWidth / 2f + startXPosition;
+		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2 - (armorWidth * 2);
+		if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
 
 		if (config.RTL) {
 			for ( int i = slots.length - 1; i > 0; i-- ) {
 				EquipmentSlot slot = slots[i];
+				if (!slot.isArmor()) continue;
+				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
+
+				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
 				x -= armorWidth;
 
-				if ( slot.isArmor() ) {
-					renderArmorPiece(context, x, armorHeight, minecraft.player, armorAccessor.getArmorPiece(minecraft.player, slot));
-				}
+				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
 			}
 		} else {
             for ( EquipmentSlot slot : slots ) {
-                x -= armorWidth;
+				if ( !slot.isArmor() ) continue;
+				ItemStack armor = armorAccessor.getArmorPiece(minecraft.player, slot);
 
-                if ( slot.isArmor() ) {
-                    renderArmorPiece(context, x, armorHeight, minecraft.player, armorAccessor.getArmorPiece(minecraft.player, slot));
-                }
+				if ( config.TRIM_EMPTY_SLOTS && armor.isEmpty() ) continue;
+				x -= armorWidth;
+
+				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
             }
 		}
+		System.out.println(x);
 
 /*		Putting this on the backburner for a little while to implement other things - Legoraft
 
