@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class AccessoriesArmorAccessor extends ArmorAccessor {
+public class AccessoriesArmorAccessor implements ArmorAccessor {
     @Override
     public String getName() {
         return "Accessories";
