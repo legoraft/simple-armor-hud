@@ -3,6 +3,7 @@ package com.armorhud.config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.CycleButton;
@@ -11,6 +12,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.gui.layouts.*;
 import net.minecraft.network.chat.Component;
+
+import javax.swing.text.html.Option;
 
 @Environment(EnvType.CLIENT)
 public class configScreen extends OptionsSubScreen {
@@ -31,6 +34,7 @@ public class configScreen extends OptionsSubScreen {
 
     public Button doneButton;
 
+    /*
     @Override
     protected void init() {
         doubleHotbarToggle = CycleButton.onOffBuilder(config.DOUBLE_HOTBAR)
@@ -72,20 +76,43 @@ public class configScreen extends OptionsSubScreen {
 
         addRenderableWidget(doneButton);
     }
+    */
 
     @Override
-    protected void addOptions() { }
+    protected void addOptions() {
+        assert this.list != null;
 
-    @Override
-    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
-        context.centeredText(this.font, Component.translatable("config.title"), this.width / 2, 12, 0xffffff);
-        super.extractRenderState(context, mouseX, mouseY, delta);
+        OptionInstance<config.Position> armorPositionOptions = new OptionInstance<>(
+                "config.armorposition",
+                OptionInstance.noTooltip(),
+                (component, value) -> value.getDisplayName(),
+                new OptionInstance.Enum<>(java.util.List.of(config.Position.values()), null),
+                config.position,
+                value -> config.position = value
+        );
+
+        this.list.addHeader(Component.translatable("config.header.general"));
+        this.list.addSmall(
+                OptionInstance.createBoolean("config.armorvisible", config.ARMOR_HUD, v -> config.ARMOR_HUD = v),
+                OptionInstance.createBoolean("config.disablearmorbar", config.DISABLE_ARMOR_BAR, v -> config.DISABLE_ARMOR_BAR = v)
+        );
+
+        this.list.addHeader(Component.translatable("config.header.compatibility"));
+        this.list.addSmall(
+                OptionInstance.createBoolean("config.doublehotbar", config.DOUBLE_HOTBAR, v -> config.DOUBLE_HOTBAR = v),
+                OptionInstance.createBoolean("config.bettermounthud", config.BETTER_MOUNT_HUD, v -> config.BETTER_MOUNT_HUD = v)
+        );
+
+        this.list.addHeader(Component.translatable("config.header.display"));
+        this.list.addSmall(
+                OptionInstance.createBoolean("config.righttoleft", config.RTL, v -> config.RTL = v),
+                OptionInstance.createBoolean("config.trimemptyslots", config.TRIM_EMPTY_SLOTS, v -> config.TRIM_EMPTY_SLOTS = v),
+                armorPositionOptions
+        );
     }
 
     @Override
     public void onClose() {
-        assert this.minecraft != null;
-
         config.save();
         this.minecraft.setScreen(this.parent);
     }
