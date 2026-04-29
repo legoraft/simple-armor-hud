@@ -36,7 +36,7 @@ If you see any missing languages or ar familiar translating, feel free to open a
 Simple armor hud requires the [Fabric API](https://modrinth.com/mod/fabric-api)
 
 ### Installation
-Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud) and [Releases](https://github.com/LegoRaft/simple-armor-hud/releases) After downloading, you can put the `.jar` file in your `mods` folder. If you don't have fabric installed, take a look at this [installation tutorial](https://fabricmc.net/wiki/install) _Note: Simple armor hud **requires** the Fabric API_
+Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud) and [Releases](https://github.com/LegoRaft/simple-armor-hud/releases). After downloading, you can put the `.jar` file in your `mods` folder. If you don't have fabric installed, take a look at this [installation tutorial](https://fabricmc.net/wiki/install) _Note: Simple armor hud **requires** the Fabric API_
 
 ### Build
 To build from source, follow these steps:
