@@ -30,13 +30,13 @@ This mod currently supports the following languages:
 - Vietnamese
 - Traditional Chinese
 
-If you see any missing languages or ar familiar translating, feel free to open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) and add your translation in a new [lang file](https://github.com/legoraft/simple-armor-hud/tree/main/src/main/resources/assets/simple-armor-hud/lang). The [`en_us.json`](https://github.com/legoraft/simple-armor-hud/blob/main/src/main/resources/assets/simple-armor-hud/lang/en_us.json) file is the source of truth for translation keys, so reference that one.
+If you see any missing languages or ar familiar translating, feel free to open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls) and add your translation in a new [lang file](./src/main/resources/assets/simple-armor-hud/lang). The [`en_us.json`](./src/main/resources/assets/simple-armor-hud/lang/en_us.json) file is the source of truth for translation keys, so reference that one.
 
 ### Dependencies
 Simple armor hud requires the [Fabric API](https://modrinth.com/mod/fabric-api)
 
 ### Installation
-Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud), [Releases](https://github.com/LegoRaft/simple-armor-hud/releases) and on [Curseforge](https://www.curseforge.com/minecraft/mc-mods/simple-armor-hud). After downloading, you can put the `.jar` file in your `mods` folder. If you don't have fabric installed, take a look at this [installation tutorial](https://fabricmc.net/wiki/install) _Note: Simple armor hud **requires** the Fabric API_
+Releases for the mod are found on [Modrinth](https://modrinth.com/mod/simple-armor-hud) and [Releases](https://github.com/LegoRaft/simple-armor-hud/releases) After downloading, you can put the `.jar` file in your `mods` folder. If you don't have fabric installed, take a look at this [installation tutorial](https://fabricmc.net/wiki/install) _Note: Simple armor hud **requires** the Fabric API_
 
 ### Build
 To build from source, follow these steps:
