@@ -5,18 +5,10 @@
 <h1 align="center">Simple armor hud</h1>
 
 <p align="center">
-    <a href="https://github.com/legoraft/simple-armor-hud/releases/latest">
-        <img src="https://img.shields.io/github/v/release/legoraft/simple-armor-hud?color=yellow" alt="Release"/>
-    </a>
-    <a href="https://modrinth.com/project/tJflAtvJ">
-        <img src="https://img.shields.io/modrinth/dt/tJflAtvJ" alt="Modrinth downloads"/>
-    </a>
-    <a href="https://github.com/legoraft/simple-armor-hud/releases/">
-        <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
-    </a>
-    <a href="https://discord.gg/rbczmnbwKR">
-        <img src="https://img.shields.io/discord/1501892493715701820?style=flat&label=discord&color=5865F2&link=https%3A%2F%2Fdiscord.gg%2FrbczmnbwKR" alt="Discord invite"/>
-    </a>
+    <a href="https://github.com/legoraft/simple-armor-hud/releases/latest"><img src="https://img.shields.io/github/v/release/legoraft/simple-armor-hud?color=yellow" alt="Release"/></a>
+    <a href="https://modrinth.com/project/tJflAtvJ"><img src="https://img.shields.io/modrinth/dt/tJflAtvJ" alt="Modrinth downloads"/></a>
+    <a href="https://github.com/legoraft/simple-armor-hud/releases/"><img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/></a>
+    <a href="https://discord.gg/rbczmnbwKR"><img src="https://img.shields.io/discord/1501892493715701820?style=flat&label=discord&color=5865F2&link=https%3A%2F%2Fdiscord.gg%2FrbczmnbwKR" alt="Discord invite"/></a>
 </p>
 
 ## Information
