@@ -20,8 +20,8 @@ _Shows armor you're currently wearing_
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/dcc817d1be3765a8af5ef581bff1abe909c77e47.png" alt="armor hud underwater" width="640"/><br>
 _Moves armor up underwater_
 
-### Bugs
-If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls).
+### Contribute
+If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls). If you have any questions about the code or just want to talk, you can also join the [discord](https://discord.gg/rbczmnbwKR).
 
 ### Translations
 This mod currently supports the following languages:
