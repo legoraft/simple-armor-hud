@@ -5,9 +5,10 @@
 <h1 align="center">Simple armor hud</h1>
 
 <p align="center">
-    <img src="https://img.shields.io/github/v/release/LegoRaft/simple-armor-hud?color=yellow" alt="Release"/>
-    <img src="https://img.shields.io/modrinth/dt/tJflAtvJ?label=modrinth" alt="Modrinth downloads"/>
+    <img src="https://img.shields.io/github/v/release/legoraft/simple-armor-hud?color=yellow" alt="Release"/>
+    <img src="https://img.shields.io/modrinth/dt/tJflAtvJ" alt="Modrinth downloads"/>
     <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
+    <img src="https://img.shields.io/discord/1501892493715701820" alt="Discord invite"/>
 </p>
 
 ## Information
