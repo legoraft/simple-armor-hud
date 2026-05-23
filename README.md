@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/github/v/release/legoraft/simple-armor-hud?color=yellow" alt="Release"/>
     <img src="https://img.shields.io/modrinth/dt/tJflAtvJ" alt="Modrinth downloads"/>
     <img src="https://img.shields.io/github/downloads/legoraft/simple-armor-hud/total" alt="Github downloads"/>
-    <img src="https://img.shields.io/discord/1501892493715701820?style=flat&label=discord&link=https%3A%2F%2Fdiscord.gg%2FrbczmnbwKR" alt="Discord invite"/>
+    <img src="https://img.shields.io/discord/1501892493715701820?style=flat&label=discord&color=5865F2&link=https%3A%2F%2Fdiscord.gg%2FrbczmnbwKR" alt="Discord invite"/>
 </p>
 
 ## Information
