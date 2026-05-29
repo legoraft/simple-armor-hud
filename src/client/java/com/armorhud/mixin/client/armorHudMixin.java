@@ -76,7 +76,7 @@ public abstract class armorHudMixin {
 		List<ItemStack> armorPieces = armorAccessor.getArmorPieces(minecraft.player);
 
 		final int hungerWidth = 14; // Magic number to center 4 armor pieces
-		final int armorWidth = 15;
+		final int armorWidth = 24;
 
 		int emptyArmorSlots = 0;
 		if ( config.TRIM_EMPTY_SLOTS ) {
