@@ -5,9 +5,9 @@ import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.Hud;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(Gui.class)
+@Mixin(Hud.class)
 public abstract class armorHudMixin {
 
 	@Shadow @Final private Minecraft minecraft;
