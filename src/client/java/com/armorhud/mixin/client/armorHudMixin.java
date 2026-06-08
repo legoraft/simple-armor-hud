@@ -53,7 +53,11 @@ public abstract class armorHudMixin {
 				renderArmor(graphics, HEALTHBAR_X);
 				break;
 			case "HOTBAR_LEFT":
-				renderArmor(graphics, HOTBAR_LEFT_X);
+				if ( !minecraft.player.getOffhandItem().isEmpty() ) {
+					renderArmor(graphics, HOTBAR_LEFT_X - 28);
+				} else {
+					renderArmor(graphics, HOTBAR_LEFT_X);
+				}
 				break;
 			case "HOTBAR_RIGHT":
 				if ( minecraft.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR ) {
