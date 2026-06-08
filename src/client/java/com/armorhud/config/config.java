@@ -1,5 +1,6 @@
 package com.armorhud.config;
 
+import com.armorhud.armorHud;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.LogManager;
@@ -65,14 +66,14 @@ public class config {
             try {
                 Files.createFile(CONFIG_PATH);
             } catch (IOException e) {
-                LogManager.getLogger("Simple Armor Hud").error("Failed to create config file");
+                armorHud.LOGGER.error("Failed to create config file");
             }
         }
 
         try {
             properties.store(Files.newOutputStream(CONFIG_PATH), "Simple Armor Hud config file");
-        } catch (IOException e) {£
-            LogManager.getLogger("Simple Armor Hud").error("Failed to write config");
+        } catch (IOException e) {
+            armorHud.LOGGER.error("Failed to write config");
         }
     }
 
@@ -84,14 +85,14 @@ public class config {
                 Files.createFile(CONFIG_PATH);
                 save();
             } catch (IOException e) {
-                LogManager.getLogger("Simple Armor Hud").error("Failed to create config file");
+                armorHud.LOGGER.error("Failed to create config file");
             }
         }
 
         try {
             properties.load(Files.newInputStream(CONFIG_PATH));
         } catch (IOException e) {
-            LogManager.getLogger("Simple Armor Hud").error("Failed to read config");
+            armorHud.LOGGER.error("Failed to read config");
         }
 
         read(properties);
