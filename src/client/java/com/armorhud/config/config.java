@@ -65,14 +65,14 @@ public class config {
             try {
                 Files.createFile(CONFIG_PATH);
             } catch (IOException e) {
-                LogManager.getLogger("Simple Survival Tweaks").error("Failed to create config file");
+                LogManager.getLogger("Simple Armor Hud").error("Failed to create config file");
             }
         }
 
         try {
-            properties.store(Files.newOutputStream(CONFIG_PATH), "Simple Survival Tweaks config file");
-        } catch (IOException e) {
-            LogManager.getLogger("Simple Survival Tweaks").error("Failed to write config");
+            properties.store(Files.newOutputStream(CONFIG_PATH), "Simple Armor Hud config file");
+        } catch (IOException e) {£
+            LogManager.getLogger("Simple Armor Hud").error("Failed to write config");
         }
     }
 
@@ -84,14 +84,14 @@ public class config {
                 Files.createFile(CONFIG_PATH);
                 save();
             } catch (IOException e) {
-                LogManager.getLogger("Simple Survival Tweaks").error("Failed to create config file");
+                LogManager.getLogger("Simple Armor Hud").error("Failed to create config file");
             }
         }
 
         try {
             properties.load(Files.newInputStream(CONFIG_PATH));
         } catch (IOException e) {
-            LogManager.getLogger("Simple Survival Tweaks").error("Failed to read config");
+            LogManager.getLogger("Simple Armor Hud").error("Failed to read config");
         }
 
         read(properties);
