@@ -4,6 +4,7 @@ import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import com.armorhud.hud.armorRenderer;
 import com.armorhud.hud.entityMovement;
+import com.armorhud.hud.armorPlacement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.AttackIndicatorStatus;
@@ -26,11 +27,6 @@ public abstract class armorHudMixin {
 	@Unique int armorHeight;
 	@Unique boolean initialized;
 
-	@Unique private final int FOODBAR_X = 91;
-	@Unique private final int HEALTHBAR_X = -10;
-	@Unique private final int HOTBAR_LEFT_X = -83;
-	@Unique private final int HOTBAR_RIGHT_X = 165;
-
 	@Inject(at = @At("TAIL"), method = "extractItemHotbar")
 	private void renderHud(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		if( !config.ARMOR_HUD ) { return; }
@@ -42,56 +38,16 @@ public abstract class armorHudMixin {
             initialized = true;
         }
 
-		switch ( config.position.name() ) {
-			case "FOODBAR":
-				armorRenderer.renderArmor(graphics, minecraft, armorHeight, FOODBAR_X);
-				break;
-			case "HEALTHBAR":
-				armorRenderer.renderArmor(graphics, minecraft, armorHeight, HEALTHBAR_X);
-				break;
-			case "HOTBAR_LEFT":
-				if ( !minecraft.player.getOffhandItem().isEmpty() ) {
-					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_LEFT_X - 28);
-				} else {
-					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_LEFT_X);
-				}
-				break;
-			case "HOTBAR_RIGHT":
-				if ( minecraft.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR ) {
-					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_RIGHT_X + 25);
-				} else {
-					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_RIGHT_X);
-				}
-				break;
-		}
-
-		moveArmor(graphics);
+		armorPlacement.place(graphics, minecraft);
 	}
 
 	@Unique
 	private void moveArmor(GuiGraphicsExtractor graphics) {
-		if ( config.position != config.Position.FOODBAR && config.position != config.Position.HEALTHBAR ) {
-			int scaledHeight = graphics.guiHeight();
-
-			switch ( config.position.name() ) {
-				case "HOTBAR_LEFT", "HOTBAR_RIGHT":
-					armorHeight = scaledHeight - 19;
-					break;
-            }
-
-			return;
-		}
-
 		int scaledHeight = graphics.guiHeight();
 		int healthDisplacement = 0;
 		assert minecraft.player != null;
 
-//		Moves armorhud up if player uses double hotbar
-		armorHeight = scaledHeight - (config.DOUBLE_HOTBAR ? 76 : 55);
-
-/*  	TODO: fix visual bug where remaining hearts available (>20hp) get removed later than armor hud -Dino
-		Skips unnecessary checks when Above_Health_Bar is on, not a fan of the extra if statement, but it works -Dino
-		Note: setting gets turned off above 9 rows of hearts, since the hud will fly off the screen at some point -Dino			*/
+		armorHeight = armorPlacement.heightPosition(scaledHeight, armorHeight);
 
 		if ( config.position == config.Position.HEALTHBAR ) {
 			if ( minecraft.player.getMaxHealth() + minecraft.player.getMaxAbsorption() < 180 ) {
