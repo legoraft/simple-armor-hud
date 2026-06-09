@@ -49,73 +49,28 @@ public abstract class armorHudMixin {
 
 		switch ( config.position.name() ) {
 			case "FOODBAR":
-				renderArmor(graphics, FOODBAR_X);
+				armorRenderer.renderArmor(graphics, minecraft, armorHeight, FOODBAR_X);
 				break;
 			case "HEALTHBAR":
-				renderArmor(graphics, HEALTHBAR_X);
+				armorRenderer.renderArmor(graphics, minecraft, armorHeight, HEALTHBAR_X);
 				break;
 			case "HOTBAR_LEFT":
 				if ( !minecraft.player.getOffhandItem().isEmpty() ) {
-					renderArmor(graphics, HOTBAR_LEFT_X - 28);
+					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_LEFT_X - 28);
 				} else {
-					renderArmor(graphics, HOTBAR_LEFT_X);
+					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_LEFT_X);
 				}
 				break;
 			case "HOTBAR_RIGHT":
 				if ( minecraft.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR ) {
-					renderArmor(graphics, HOTBAR_RIGHT_X + 25);
+					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_RIGHT_X + 25);
 				} else {
-					renderArmor(graphics, HOTBAR_RIGHT_X);
+					armorRenderer.renderArmor(graphics, minecraft, armorHeight, HOTBAR_RIGHT_X);
 				}
 				break;
 		}
 
 		moveArmor(graphics);
-	}
-
-	@Unique
-	private void renderArmor(GuiGraphicsExtractor context, int startXPosition) {
-		int scaledWidth = context.guiWidth();
-
-		assert minecraft.player != null;
-		ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
-		List<ItemStack> armorPieces = armorAccessor.getArmorPieces(minecraft.player);
-
-		final int hungerWidth = 14; // Magic number to center 4 armor pieces
-		final int armorWidth = 15;
-
-		int emptyArmorSlots = 0;
-		if ( config.TRIM_EMPTY_SLOTS ) {
-			for ( ItemStack stack : armorPieces ) {
-				if ( stack.isEmpty() ) {
-					emptyArmorSlots++;
-				}
-			}
-		}
-
-		float hungerX = scaledWidth / 2f + startXPosition;
-		float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2 - (armorWidth * 2);
-
-		if (config.RTL) {
-			if ( config.TRIM_EMPTY_SLOTS ) { x -= (float) (( (float) armorWidth / 2 ) + 0.5); }
-			x += armorWidth;
-			armorPieces = armorPieces.reversed();
-
-			for ( ItemStack armor : armorPieces ) {
-				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
-				x -= armorWidth;
-
-				armorRenderer.renderArmorPiece(context, minecraft, minecraft.player, x, armorHeight, armor);
-			}
-		} else {
-			if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
-			for ( ItemStack armor : armorPieces ) {
-				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
-				x -= armorWidth;
-
-				armorRenderer.renderArmorPiece(context, minecraft, minecraft.player, x, armorHeight, armor);
-			}
-		}
 	}
 
 	@Unique
