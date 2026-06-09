@@ -17,8 +17,10 @@ This mod shows your armor above the foodbar in the in-game hud. It also moves ar
 ### Features
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/e9e59b541926f4ef4ab4081a2d5fb39ed7926711.png"  alt="armor hud in third person" width="640"/> <br>
 _Shows armor you're currently wearing_
+
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/98b174ef60420883b8b20b54b196f2a232a20bef.png" alt="armor hud positions" width="640"/> <br>
 _Different armor positions_
+
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/dcc817d1be3765a8af5ef581bff1abe909c77e47.png" alt="armor hud underwater" width="640"/> <br>
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/f2924134da77a7eab4454c79fc21acfb4340703c.png" alt="armor hud on horse" width="640"/> <br>
 _Dynamic armor movement_
