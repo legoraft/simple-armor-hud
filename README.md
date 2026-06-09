@@ -12,7 +12,7 @@
 </p>
 
 ## Information
-This mod shows your armor above the foodbar in the in-game hud. It also moves armor up when underwater and down when in creative and has a few config options for compatibility with other mods. You can toggle the armor hud on or off with a keybind, configurable through the normal menu.
+A simple armor hud that adds your armor to the hud where you'd like it to be. It moves armor depending on your situation (underwater, in creative, on a mount) and has compatibility options for other mods. Everything is configurable through modmenu or a config file and a keybind toggle is available in the controls menu.
 
 ### Features
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/e9e59b541926f4ef4ab4081a2d5fb39ed7926711.png"  alt="armor hud in third person" width="640"/> <br>
