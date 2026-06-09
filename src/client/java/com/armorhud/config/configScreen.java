@@ -36,17 +36,17 @@ public class configScreen extends OptionsSubScreen {
                 OptionInstance.createBoolean("config.disablearmorbar", config.DISABLE_ARMOR_BAR, v -> config.DISABLE_ARMOR_BAR = v)
         );
 
-        this.list.addHeader(Component.translatable("config.header.compatibility"));
-        this.list.addSmall(
-                OptionInstance.createBoolean("config.doublehotbar", config.DOUBLE_HOTBAR, v -> config.DOUBLE_HOTBAR = v),
-                OptionInstance.createBoolean("config.bettermounthud", config.BETTER_MOUNT_HUD, v -> config.BETTER_MOUNT_HUD = v)
-        );
-
         this.list.addHeader(Component.translatable("config.header.display"));
         this.list.addSmall(
                 armorPositionOptions,
                 OptionInstance.createBoolean("config.righttoleft", config.RTL, v -> config.RTL = v),
                 OptionInstance.createBoolean("config.trimemptyslots", config.TRIM_EMPTY_SLOTS, v -> config.TRIM_EMPTY_SLOTS = v)
+        );
+
+        this.list.addHeader(Component.translatable("config.header.compatibility"));
+        this.list.addSmall(
+                OptionInstance.createBoolean("config.doublehotbar", config.DOUBLE_HOTBAR, v -> config.DOUBLE_HOTBAR = v),
+                OptionInstance.createBoolean("config.bettermounthud", config.BETTER_MOUNT_HUD, v -> config.BETTER_MOUNT_HUD = v)
         );
     }
 
