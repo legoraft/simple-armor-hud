@@ -39,23 +39,23 @@ public class config {
     }
 
     public static void write(Properties properties) {
-        properties.setProperty("better_mount_hud", Boolean.toString(BETTER_MOUNT_HUD));
-        properties.setProperty("double_hotbar", Boolean.toString(DOUBLE_HOTBAR));
         properties.setProperty("armor_hud", Boolean.toString(ARMOR_HUD));
         properties.setProperty("disable_armor_bar", Boolean.toString(DISABLE_ARMOR_BAR));
         properties.setProperty("position", position.name());
         properties.setProperty("right_to_left", Boolean.toString(RTL));
         properties.setProperty("trim_empty_slots", Boolean.toString(TRIM_EMPTY_SLOTS));
+        properties.setProperty("better_mount_hud", Boolean.toString(BETTER_MOUNT_HUD));
+        properties.setProperty("double_hotbar", Boolean.toString(DOUBLE_HOTBAR));
     }
 
     public void read(Properties properties) {
-        BETTER_MOUNT_HUD =  Boolean.parseBoolean(properties.getProperty("better_mount_hud", "false"));
-        DOUBLE_HOTBAR =  Boolean.parseBoolean(properties.getProperty("double_hotbar", "false"));
         ARMOR_HUD = Boolean.parseBoolean(properties.getProperty("armor_hud", "true"));
         DISABLE_ARMOR_BAR = Boolean.parseBoolean(properties.getProperty("disable_armor_bar", "false"));
         position = Position.valueOf(properties.getProperty("position", "FOODBAR"));
         RTL = Boolean.parseBoolean(properties.getProperty("right_to_left", "false"));
         TRIM_EMPTY_SLOTS = Boolean.parseBoolean(properties.getProperty("trim_empty_slots", "false"));
+        BETTER_MOUNT_HUD =  Boolean.parseBoolean(properties.getProperty("better_mount_hud", "false"));
+        DOUBLE_HOTBAR =  Boolean.parseBoolean(properties.getProperty("double_hotbar", "false"));
     }
 
     public static void save() {
