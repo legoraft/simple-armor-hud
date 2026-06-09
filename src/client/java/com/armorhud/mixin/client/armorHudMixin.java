@@ -3,6 +3,7 @@ package com.armorhud.mixin.client;
 import com.armorhud.armor.ArmorAccessor;
 import com.armorhud.armorHud;
 import com.armorhud.config.config;
+import com.armorhud.hud.armorRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.AttackIndicatorStatus;
@@ -103,7 +104,7 @@ public abstract class armorHudMixin {
 				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
 				x -= armorWidth;
 
-				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
+				armorRenderer.renderArmorPiece(context, minecraft, minecraft.player, x, armorHeight, armor);
 			}
 		} else {
 			if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
@@ -111,7 +112,7 @@ public abstract class armorHudMixin {
 				if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
 				x -= armorWidth;
 
-				renderArmorPiece(context, x, armorHeight, minecraft.player, armor);
+				armorRenderer.renderArmorPiece(context, minecraft, minecraft.player, x, armorHeight, armor);
 			}
 		}
 	}
@@ -199,20 +200,6 @@ public abstract class armorHudMixin {
 				}
 			}
 		}
-	}
-
-	// Pretty much the same as renderHotbarItem but with x and y as float parameters.
-	@Unique
-	private void renderArmorPiece(GuiGraphicsExtractor context, float x, float y, Player player, ItemStack stack) {
-		if ( stack.isEmpty() ) return;
-
-		context.pose().pushMatrix();
-		context.pose().translate(x, y);
-
-		context.item(player, stack, 0, 0, 1);
-
-		context.itemDecorations(this.minecraft.font, stack, 0,0);
-		context.pose().popMatrix();
 	}
 
 }
