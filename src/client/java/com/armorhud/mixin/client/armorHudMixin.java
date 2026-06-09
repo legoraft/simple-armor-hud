@@ -4,6 +4,7 @@ import com.armorhud.armor.ArmorAccessor;
 import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import com.armorhud.hud.armorRenderer;
+import com.armorhud.hud.entityMovement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.AttackIndicatorStatus;
@@ -170,36 +171,8 @@ public abstract class armorHudMixin {
 
 //			Moves armorhud up if player is on mount, like horse
 			if ( minecraft.player.isPassenger() && getPlayerVehicleWithHealth() != null ) {
-				moveRiddenEntity();
+				armorHeight = entityMovement.mountAdjustment(minecraft, getPlayerVehicleWithHealth().getMaxHealth(), armorHeight);
 			}
 		}
 	}
-
-	@Unique
-	private void moveRiddenEntity() {
-		assert minecraft.player != null;
-
-//		Check if entity player is riding is alive, like a horse
-		if ( getPlayerVehicleWithHealth().isAlive() ) {
-
-//		If horse health is 21, it still displays 10 hearts
-			if ( getPlayerVehicleWithHealth().getMaxHealth() > 21 ) {
-				if ( config.BETTER_MOUNT_HUD && !minecraft.player.isCreative() ) {
-					armorHeight -= 20;
-				} else {
-					armorHeight -= (minecraft.player.isCreative() ? 26 : 10);
-				}
-			}
-
-//		Armor hud only has to be moved up if better mount hud is enabled or player is in creative
-			else {
-				if ( config.BETTER_MOUNT_HUD && !minecraft.player.isCreative() ) {
-					armorHeight -= 10;
-				} else if ( minecraft.player.isCreative() ) {
-					armorHeight -= 16;
-				}
-			}
-		}
-	}
-
 }
