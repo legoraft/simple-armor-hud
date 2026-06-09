@@ -11,8 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class armorRenderer {
-    public static void renderArmor(GuiGraphicsExtractor context, Minecraft minecraft, int armorHeight, int startXPosition) {
-        int scaledWidth = context.guiWidth();
+    public static void renderArmor(GuiGraphicsExtractor graphics, Minecraft minecraft, int armorHeight, int startXPosition) {
+        int scaledWidth = graphics.guiWidth();
 
         assert minecraft.player != null;
         ArmorAccessor armorAccessor = armorHud.getArmorAccessor();
@@ -42,7 +42,7 @@ public class armorRenderer {
                 if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
                 x -= armorWidth;
 
-                renderArmorPiece(context, minecraft, minecraft.player, x, armorHeight, armor);
+                renderArmorPiece(graphics, minecraft, minecraft.player, x, armorHeight, armor);
             }
         } else {
             if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
@@ -50,20 +50,20 @@ public class armorRenderer {
                 if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
                 x -= armorWidth;
 
-                renderArmorPiece(context, minecraft, minecraft.player, x, armorHeight, armor);
+                renderArmorPiece(graphics, minecraft, minecraft.player, x, armorHeight, armor);
             }
         }
     }
 
-    public static void renderArmorPiece(GuiGraphicsExtractor context, Minecraft minecraft, Player player, float x, float y, ItemStack stack) {
+    public static void renderArmorPiece(GuiGraphicsExtractor graphics, Minecraft minecraft, Player player, float x, float y, ItemStack stack) {
         if ( stack.isEmpty() ) return;
 
-        context.pose().pushMatrix();
-        context.pose().translate(x, y);
+        graphics.pose().pushMatrix();
+        graphics.pose().translate(x, y);
 
-        context.item(player, stack, 0, 0, 1);
+        graphics.item(player, stack, 0, 0, 1);
 
-        context.itemDecorations(minecraft.font, stack, 0,0);
-        context.pose().popMatrix();
+        graphics.itemDecorations(minecraft.font, stack, 0,0);
+        graphics.pose().popMatrix();
     }
 }

@@ -1,6 +1,5 @@
 package com.armorhud.mixin.client;
 
-import com.armorhud.armor.ArmorAccessor;
 import com.armorhud.armorHud;
 import com.armorhud.config.config;
 import com.armorhud.hud.armorRenderer;
@@ -11,8 +10,6 @@ import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Hud;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,8 +17,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.List;
 
 @Mixin(Hud.class)
 public abstract class armorHudMixin {
@@ -74,9 +69,9 @@ public abstract class armorHudMixin {
 	}
 
 	@Unique
-	private void moveArmor(GuiGraphicsExtractor context) {
+	private void moveArmor(GuiGraphicsExtractor graphics) {
 		if ( config.position != config.Position.FOODBAR && config.position != config.Position.HEALTHBAR ) {
-			int scaledHeight = context.guiHeight();
+			int scaledHeight = graphics.guiHeight();
 
 			switch ( config.position.name() ) {
 				case "HOTBAR_LEFT", "HOTBAR_RIGHT":
@@ -87,7 +82,7 @@ public abstract class armorHudMixin {
 			return;
 		}
 
-		int scaledHeight = context.guiHeight();
+		int scaledHeight = graphics.guiHeight();
 		int healthDisplacement = 0;
 		assert minecraft.player != null;
 
