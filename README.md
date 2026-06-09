@@ -17,8 +17,11 @@ This mod shows your armor above the foodbar in the in-game hud. It also moves ar
 ### Features
 <img src="https://cdn.modrinth.com/data/tJflAtvJ/images/e9e59b541926f4ef4ab4081a2d5fb39ed7926711.png"  alt="armor hud in third person" width="640"/> <br>
 _Shows armor you're currently wearing_
-<img src="https://cdn.modrinth.com/data/tJflAtvJ/images/dcc817d1be3765a8af5ef581bff1abe909c77e47.png" alt="armor hud underwater" width="640"/><br>
-_Moves armor up underwater_
+<img src="https://cdn.modrinth.com/data/tJflAtvJ/images/98b174ef60420883b8b20b54b196f2a232a20bef.png" alt="armor hud positions" width="640"/> <br>
+_Different armor positions_
+<img src="https://cdn.modrinth.com/data/tJflAtvJ/images/dcc817d1be3765a8af5ef581bff1abe909c77e47.png" alt="armor hud underwater" width="640"/> <br>
+<img src="https://cdn.modrinth.com/data/tJflAtvJ/images/f2924134da77a7eab4454c79fc21acfb4340703c.png" alt="armor hud on horse" width="640"/> <br>
+_Dynamic armor movement_
 
 ### Contribute
 If you have any bug reports or a suggestion for the mod leave them [here](https://github.com/LegoRaft/simple-armor-hud/issues). If you have any coding experience and want to help out with development, fork the repository and open a [pull request](https://github.com/legoraft/simple-armor-hud/pulls). If you have any questions about the code or just want to talk, you can also join the [discord](https://discord.gg/rbczmnbwKR).
