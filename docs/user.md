@@ -9,6 +9,7 @@ To configure Simple Armor Hud, simply open the settings menu through Mod Menu. T
 The configuration file has a few different options to adjust. There's one option that isn't a boolean, all others are.
 
 - `armor_hud`: Sets the visibility of the armor hud (`true`/`false`)
+- `disable_armor_bar`: Sets the visibility of the vanilla armor bar (`true`/`false`)
 - `position`: Sets the position of the armor hud (`FOODBAR`, `HEALTHBAR`, `HOTBAR_LEFT`, `HOTBAR_RIGHT`)
 - `right_to_left`: Switches the direction of the hud (`true`/`false`)
 - `trim_empty_slots`: Aligns the hud to center and trims all empty slots out (`true`/`false`)
