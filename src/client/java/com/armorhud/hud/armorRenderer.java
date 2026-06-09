@@ -21,6 +21,7 @@ public class armorRenderer {
         final int hungerWidth = 14; // Magic number to center 4 armor pieces
         final int armorWidth = 15;
 
+//      If we trim empty slots, check all slots if they're empty
         int emptyArmorSlots = 0;
         if ( config.TRIM_EMPTY_SLOTS ) {
             for ( ItemStack stack : armorPieces ) {
@@ -30,26 +31,34 @@ public class armorRenderer {
             }
         }
 
+//      Magical starting positions
         float hungerX = scaledWidth / 2f + startXPosition;
         float x = hungerX + hungerWidth - (7 * emptyArmorSlots) + 2 - (armorWidth * 2);
 
+//      Armor x position calculations
         if (config.RTL) {
-            if ( config.TRIM_EMPTY_SLOTS ) { x -= (float) (( (float) armorWidth / 2 ) + 0.5); }
+            if ( config.TRIM_EMPTY_SLOTS ) {
+                x -= (float) (( (float) armorWidth / 2 ) + 0.5);
+            }
+
             x += armorWidth;
             armorPieces = armorPieces.reversed();
 
             for ( ItemStack armor : armorPieces ) {
-                if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
-                x -= armorWidth;
+                if ( config.TRIM_EMPTY_SLOTS && armor.isEmpty() ) continue;
 
+                x -= armorWidth;
                 renderArmorPiece(graphics, minecraft, minecraft.player, x, armorHeight, armor);
             }
         } else {
-            if ( config.TRIM_EMPTY_SLOTS ) { x += ( (float) hungerWidth / 2 ); }
+            if ( config.TRIM_EMPTY_SLOTS ) {
+                x += ( (float) hungerWidth / 2 );
+            }
+
             for ( ItemStack armor : armorPieces ) {
                 if (config.TRIM_EMPTY_SLOTS && armor.isEmpty()) continue;
-                x -= armorWidth;
 
+                x -= armorWidth;
                 renderArmorPiece(graphics, minecraft, minecraft.player, x, armorHeight, armor);
             }
         }
