@@ -106,7 +106,7 @@ public class armorPlacement {
                 mountHealth = mount.getMaxHealth();
             }
 
-            armorAdjustment = -entityMovement.mountAdjustment(minecraft, mountHealth, armorAdjustment);
+            armorAdjustment = -entityMovement.mountAdjustment(minecraft, mountHealth);
         }
 
         return armorAdjustment;

@@ -2,12 +2,10 @@ package com.armorhud.mixin.client;
 
 import com.armorhud.armorHud;
 import com.armorhud.config.config;
-import com.armorhud.hud.armorRenderer;
 import com.armorhud.hud.entityMovement;
 import com.armorhud.hud.armorPlacement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Hud;
 import net.minecraft.world.entity.LivingEntity;
@@ -77,7 +75,7 @@ public abstract class armorHudMixin {
 
 //			Moves armorhud up if player is on mount, like horse
 			if ( minecraft.player.isPassenger() && getPlayerVehicleWithHealth() != null ) {
-				armorHeight -= entityMovement.mountAdjustment(minecraft, getPlayerVehicleWithHealth().getMaxHealth(), armorHeight);
+				armorHeight -= entityMovement.mountAdjustment(minecraft, getPlayerVehicleWithHealth().getMaxHealth());
 			}
 		}
 	}
