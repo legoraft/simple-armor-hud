@@ -171,7 +171,7 @@ public abstract class armorHudMixin {
 
 //			Moves armorhud up if player is on mount, like horse
 			if ( minecraft.player.isPassenger() && getPlayerVehicleWithHealth() != null ) {
-				armorHeight = entityMovement.mountAdjustment(minecraft, getPlayerVehicleWithHealth().getMaxHealth(), armorHeight);
+				armorHeight -= entityMovement.mountAdjustment(minecraft, getPlayerVehicleWithHealth().getMaxHealth(), armorHeight);
 			}
 		}
 	}
